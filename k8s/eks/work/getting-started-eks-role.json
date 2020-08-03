@@ -1,0 +1,21 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "getting-started-eks-role",
+        "RoleId": "AROA2N5DKCHORLGQFGALD",
+        "Arn": "arn:aws:iam::717065163229:role/getting-started-eks-role",
+        "CreateDate": "2020-08-03T02:21:35+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "eks.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+    }
+}
