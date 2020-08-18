@@ -12,7 +12,7 @@
 ./bin/istioctl install --set addonComponents.kiali.enabled=false
 
 # configuracion de un profile en particular
-./bin/istioctl profile dump demo
+istioctl profile dump demo
 
 ./bin/istioctl profile list
 
@@ -20,7 +20,7 @@
 ./bin/istioctl install -f {dump-file}
 
 # para minikube (solo soporta first-party-jwt)
-./bin/istioctl install --set values.global.jwtPolicy=first-party-jwt -f {dump-file} 
+./bin/istioctl install --set values.global.jwtPolicy=first-party-jwt -f {dump-file}
 
 # YAML de instalacion istio nativos de kubernetes
 istioctl manifest generate -f {dump-file} 
