@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-api-svc
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: nodejs-api
+  ports:
+    - protocol: TCP
+      targetPort: 3000 # donde escucha el pod
+      port: 3000 # donde escucha e service
+      nodePort: 30080
+  type: NodePort

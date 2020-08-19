@@ -4,7 +4,7 @@ const express = require('express');
 const http = require("http");
 
 // Constants
-const PORT = 8081;
+const PORT = 8080;
 const HOST = '0.0.0.0';
 
 
@@ -12,9 +12,9 @@ const HOST = '0.0.0.0';
 const app = express();
 app.get('/', (req, res) => {
   var options = {
-    host: "maps.googleapis.com",
-    port: 80,
-    path: '/maps/api/directions/json?origin=Central%20Park&destination=Empire%20State%20Building&sensor=false&mode=walking',
+    host: "localhost",
+    port: 8081,
+    path: '/',
     method: 'GET'
   };
   
@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
     resp.on('data', function (chunk) {
       //console.log('BODY: ' + chunk);
       data = JSON.parse(chunk);
-      console.log(data.error_message);
-      res.json({ mensaje:data.error_message});
+      console.log(data.mensaje);
+      res.json({ mensajeFinal:data.mensaje});
     });
   }).end();
   

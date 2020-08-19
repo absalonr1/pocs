@@ -6,7 +6,7 @@
 
 # default	, demo	, minimal	,remote
 # https://istio.io/latest/docs/setup/additional-setup/config-profiles/
-./bin/istioctl install --set profile=default
+./bin/istioctl install --set profile=demo --set values.global.jwtPolicy=first-party-jwt
 
 ./bin/istioctl install --set profile=default --set addonComponents.kiali.enabled=true
 ./bin/istioctl install --set addonComponents.kiali.enabled=false
