@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodejs-api-0
+  name: nodejs-api-0
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodejs-api-0
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodejs-api-0
+    spec:
+      containers:
+      - image: nodejs-server-0
+        name: nodejs-server-0
+        imagePullPolicy: Never
+        resources: {}
+        ports:
+          - containerPort: 8080
+        env:
+        - name: svc_host
+          value: nodejs-api1-svc
+        - name: svc_port
+          value: "8081"

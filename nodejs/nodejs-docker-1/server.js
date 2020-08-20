@@ -12,12 +12,15 @@ function function2() {
 }
 
 
+var svc_host = process.env.svc_host; 
+var svc_port = process.env.svc_port;
+
 // App
 const app = express();
 app.get('/', (req, res) => {
   var options = {
-    host: "localhost",
-    port: 8082,
+    host: svc_host,
+    port: svc_port,
     path: '/',
     method: 'GET'
   };

@@ -7,6 +7,9 @@ const http = require("http");
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
+var svc_host = process.env.svc_host; 
+var svc_port = process.env.svc_port;
+
 function function2() {
   console.log('bla bla...');
 }
@@ -16,8 +19,8 @@ function function2() {
 const app = express();
 app.get('/', (req, res) => {
   var options = {
-    host: "localhost",
-    port: 8081,
+    host: svc_host,
+    port: svc_port,
     path: '/',
     method: 'GET'
   };
