@@ -10,6 +10,7 @@ spec:
     app: nodejs-api-2
   ports:
     - protocol: TCP
+      name: tcp-nodejs-api2-svc
       targetPort: 8082 # donde escucha el pod
       port: 8082 # donde escucha e service
       nodePort: 30080
