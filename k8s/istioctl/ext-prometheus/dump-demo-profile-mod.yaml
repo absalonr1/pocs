@@ -3,21 +3,21 @@ kind: IstioOperator
 spec:
   addonComponents:
     grafana:
-      enabled: true
+      enabled: false
       k8s:
         replicaCount: 1
     istiocoredns:
       enabled: false
     kiali:
-      enabled: true
+      enabled: false
       k8s:
         replicaCount: 1
     prometheus:
-      enabled: true
+      enabled: false
       k8s:
         replicaCount: 1
     tracing:
-      enabled: true
+      enabled: false
   components:
     base:
       enabled: true
@@ -35,17 +35,16 @@ spec:
       k8s:
         resources:
           requests:
-            cpu: 10m
-            memory: 40Mi
+            cpu: 100m
+            memory: 200Mi
       name: istio-egressgateway
     ingressGateways:
     - enabled: true
       k8s:
-        replicaCount: 3
         resources:
           requests:
-            cpu: 10m
-            memory: 40Mi
+            cpu: 100m
+            memory: 200Mi
         service:
           ports:
           - name: status-port
@@ -83,8 +82,8 @@ spec:
           timeoutSeconds: 5
         resources:
           requests:
-            cpu: 10m
-            memory: 100Mi
+            cpu: 500m
+            memory: 200Mi
         strategy:
           rollingUpdate:
             maxSurge: 100%
@@ -140,11 +139,11 @@ spec:
         replicaCount: 1
         resources:
           limits:
-            cpu: 4800m
-            memory: 4G
-          requests:
             cpu: 1000m
             memory: 1G
+          requests:
+            cpu: 1000m
+            memory: 400Mi
         strategy:
           rollingUpdate:
             maxSurge: 100%
@@ -483,7 +482,7 @@ spec:
         resources:
           limits:
             cpu: "1"
-            memory: 2Gi
+            memory: 1Gi
           requests:
             cpu: 200m
             memory: 400Mi
@@ -507,10 +506,10 @@ spec:
         resources:
           limits:
             cpu: 1000m
-            memory: 2048Mi
+            memory: 1G
           requests:
             cpu: 150m
-            memory: 900Mi
+            memory: 400Mi
         tag: 2.20.0
     version: ""
 
