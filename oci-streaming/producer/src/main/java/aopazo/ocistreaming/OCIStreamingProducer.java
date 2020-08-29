@@ -15,13 +15,12 @@ public class OCIStreamingProducer {
       String username ="oracleidentitycloudservice/luisopazo@gmail.com";
       String stream_pool_OCID ="ocid1.streampool.oc1.iad.amaaaaaafnixjbyapenbnk4od4gyuzg3jv5j364dd5odnggdkv3f7go75mma";
       String authToken ="719O:pwpCN74s487nKLJ";
-
+      
       Properties properties = new Properties();
-      properties.put("bootstrap.servers", "streaming.us-ashburn-1.oci.oraclecloud.com:9092");
+      properties.put("bootstrap.servers", "cell-1.streaming.us-ashburn-1.oci.oraclecloud.com:9092");
       properties.put("security.protocol", "SASL_SSL");
       properties.put("sasl.mechanism", "PLAIN");
-      properties.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required "+
-      "username=\""+tenancyName+"/"+username+"/"+stream_pool_OCID+"\" password=\""+authToken+"\";");
+      properties.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"absalon/oracleidentitycloudservice/luisopazo@gmail.com/ocid1.streampool.oc1.iad.amaaaaaafnixjbyapenbnk4od4gyuzg3jv5j364dd5odnggdkv3f7go75mma\" password=\"719O:pwpCN74s487nKLJ\";");
 
       properties.put("key.serializer", 
          "org.apache.kafka.common.serialization.StringSerializer");
@@ -31,10 +30,12 @@ public class OCIStreamingProducer {
 
       Producer<String, String> producer = new KafkaProducer<String, String>(properties);
 
-      for(int i = 0; i < 10; i++)
+      for(int i = 0; i < 10; i++){
          producer.send(new ProducerRecord<String, String>(topicName, 
-            Integer.toString(i), Integer.toString(i)));
-               System.out.println("Message sent successfully");
-               producer.close();
+            Integer.toString(i), Integer.toString(i))
+         );
+         System.out.println("Message sent successfully");
+      }
+      producer.close();
    }
 }
