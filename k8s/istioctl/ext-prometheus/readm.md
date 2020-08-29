@@ -43,7 +43,7 @@ istioctl install -f demo.yaml --set addonComponents.grafana.enabled=false --set 
 istioctl install --set profile=default --set addonComponents.grafana.enabled=false --set addonComponents.prometheus.enabled=false --set addonComponents.tracing.enabled=false --set addonComponents.kiali.enabled=false --set values.global.jwtPolicy=first-party-jwt
 
 # [C**] Version 1.70 solo incluye en profile "demo": istio-egressgateway / istio-ingressgateway / istiod
-istioctl install --set profile=default --set values.global.jwtPolicy=first-party-jwt
+istioctl install --set profile=demo --set values.global.jwtPolicy=first-party-jwt
 
 # -----------------------------------------------------------------------------
 # 3° Install Kiali
@@ -103,7 +103,7 @@ kubectl label namespace istio-demo istio-injection=enabled
 
 kubectl apply -f deployment-2.yml -n istio-demo
 kubectl apply -f svc-2.yaml  -n istio-demo
-QQQ
+curl http://$(minikube ip):30082
 # Habiliar NS y PODs especificos
 ...
 

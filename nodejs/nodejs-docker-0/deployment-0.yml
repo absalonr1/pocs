@@ -15,7 +15,7 @@ spec:
       creationTimestamp: null
       labels:
         app: nodejs-api-0
-        version: 1
+        version: "1"
     spec:
       containers:
       - image: nodejs-server-0

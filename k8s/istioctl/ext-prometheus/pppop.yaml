@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: "2020-08-23T15:24:57Z"
+  creationTimestamp: "2020-08-25T14:21:36Z"
   generateName: prometheus-prometheus-prometheus-oper-prometheus-
   labels:
     app: prometheus
@@ -22,7 +22,7 @@ metadata:
           f:statefulset.kubernetes.io/pod-name: {}
         f:ownerReferences:
           .: {}
-          k:{"uid":"d9af1543-15b7-4938-9436-48b1435cbc7c"}:
+          k:{"uid":"26d0ef05-76d0-4437-8e36-ca80a928c817"}:
             .: {}
             f:apiVersion: {}
             f:blockOwnerDeletion: {}
@@ -202,7 +202,7 @@ metadata:
               f:secretName: {}
     manager: kube-controller-manager
     operation: Update
-    time: "2020-08-23T15:24:57Z"
+    time: "2020-08-25T14:21:36Z"
   - apiVersion: v1
     fieldsType: FieldsV1
     fieldsV1:
@@ -232,13 +232,13 @@ metadata:
         f:podIP: {}
         f:podIPs:
           .: {}
-          k:{"ip":"172.18.0.7"}:
+          k:{"ip":"172.18.0.10"}:
             .: {}
             f:ip: {}
         f:startTime: {}
     manager: kubelet
     operation: Update
-    time: "2020-08-25T01:52:00Z"
+    time: "2020-08-25T14:23:07Z"
   name: prometheus-prometheus-prometheus-oper-prometheus-0
   namespace: istio-system
   ownerReferences:
@@ -247,10 +247,10 @@ metadata:
     controller: true
     kind: StatefulSet
     name: prometheus-prometheus-prometheus-oper-prometheus
-    uid: d9af1543-15b7-4938-9436-48b1435cbc7c
-  resourceVersion: "49531"
+    uid: 26d0ef05-76d0-4437-8e36-ca80a928c817
+  resourceVersion: "1228"
   selfLink: /api/v1/namespaces/istio-system/pods/prometheus-prometheus-prometheus-oper-prometheus-0
-  uid: 7243d7b2-1845-4a37-a184-027825797e63
+  uid: 8dbd28b8-714a-4765-9ee1-6a38c3e27d94
 spec:
   containers:
   - args:
@@ -303,7 +303,7 @@ spec:
     - mountPath: /etc/prometheus/rules/prometheus-prometheus-prometheus-oper-prometheus-rulefiles-0
       name: prometheus-prometheus-prometheus-oper-prometheus-rulefiles-0
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: prometheus-prometheus-oper-prometheus-token-c2lwt
+      name: prometheus-prometheus-oper-prometheus-token-9rksz
       readOnly: true
   - args:
     - --log-format=logfmt
@@ -336,7 +336,7 @@ spec:
     - mountPath: /etc/prometheus/config_out
       name: config-out
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: prometheus-prometheus-oper-prometheus-token-c2lwt
+      name: prometheus-prometheus-oper-prometheus-token-9rksz
       readOnly: true
   - args:
     - --webhook-url=http://127.0.0.1:9090/-/reload
@@ -357,7 +357,7 @@ spec:
     - mountPath: /etc/prometheus/rules/prometheus-prometheus-prometheus-oper-prometheus-rulefiles-0
       name: prometheus-prometheus-prometheus-oper-prometheus-rulefiles-0
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: prometheus-prometheus-oper-prometheus-token-c2lwt
+      name: prometheus-prometheus-oper-prometheus-token-9rksz
       readOnly: true
   dnsPolicy: ClusterFirst
   enableServiceLinks: true
@@ -401,91 +401,91 @@ spec:
     name: prometheus-prometheus-prometheus-oper-prometheus-rulefiles-0
   - emptyDir: {}
     name: prometheus-prometheus-prometheus-oper-prometheus-db
-  - name: prometheus-prometheus-oper-prometheus-token-c2lwt
+  - name: prometheus-prometheus-oper-prometheus-token-9rksz
     secret:
       defaultMode: 420
-      secretName: prometheus-prometheus-oper-prometheus-token-c2lwt
+      secretName: prometheus-prometheus-oper-prometheus-token-9rksz
 status:
   conditions:
   - lastProbeTime: null
-    lastTransitionTime: "2020-08-23T15:24:57Z"
+    lastTransitionTime: "2020-08-25T14:21:36Z"
     status: "True"
     type: Initialized
   - lastProbeTime: null
-    lastTransitionTime: "2020-08-25T01:51:59Z"
+    lastTransitionTime: "2020-08-25T14:23:07Z"
     status: "True"
     type: Ready
   - lastProbeTime: null
-    lastTransitionTime: "2020-08-25T01:51:59Z"
+    lastTransitionTime: "2020-08-25T14:23:07Z"
     status: "True"
     type: ContainersReady
   - lastProbeTime: null
-    lastTransitionTime: "2020-08-23T15:24:57Z"
+    lastTransitionTime: "2020-08-25T14:21:36Z"
     status: "True"
     type: PodScheduled
   containerStatuses:
-  - containerID: docker://c3777bf6305fc4a14e734a301c87ea5053c0ff11f184916b6ce6e30c47638560
+  - containerID: docker://8f4baf135e560ba0b9d2508eebb9451be6101f53ba557ab33e23f3ad55ce1f00
     image: quay.io/prometheus/prometheus:v2.18.2
     imageID: docker-pullable://quay.io/prometheus/prometheus@sha256:4d3303d1eb424e345cf48969bb7575d4d58472ad783ac41ea07fba92686f7ef5
     lastState:
       terminated:
-        containerID: docker://fffe0189bad53663f27959a62fa9408caa86286e24c03111cc0592ada1f2c992
-        exitCode: 0
-        finishedAt: "2020-08-24T12:57:46Z"
-        reason: Completed
-        startedAt: "2020-08-23T15:26:15Z"
+        containerID: docker://6c841ec00f1645f57817fc4da5561689919694e72700a2f2c379fac9664803b6
+        exitCode: 1
+        finishedAt: "2020-08-25T14:22:30Z"
+        message: |
+          22:30.844Z caller=main.go:678 msg="Starting TSDB ..."
+          level=info ts=2020-08-25T14:22:30.849Z caller=head.go:575 component=tsdb msg="Replaying WAL, this may take awhile"
+          level=info ts=2020-08-25T14:22:30.849Z caller=head.go:624 component=tsdb msg="WAL segment loaded" segment=0 maxSegment=0
+          level=info ts=2020-08-25T14:22:30.849Z caller=head.go:627 component=tsdb msg="WAL replay completed" duration=325.942µs
+          level=info ts=2020-08-25T14:22:30.850Z caller=main.go:694 fs_type=EXT4_SUPER_MAGIC
+          level=info ts=2020-08-25T14:22:30.851Z caller=main.go:695 msg="TSDB started"
+          level=info ts=2020-08-25T14:22:30.851Z caller=main.go:799 msg="Loading configuration file" filename=/etc/prometheus/config_out/prometheus.env.yaml
+          level=info ts=2020-08-25T14:22:30.851Z caller=main.go:547 msg="Stopping scrape discovery manager..."
+          level=info ts=2020-08-25T14:22:30.851Z caller=main.go:561 msg="Stopping notify discovery manager..."
+          level=info ts=2020-08-25T14:22:30.851Z caller=main.go:583 msg="Stopping scrape manager..."
+          level=info ts=2020-08-25T14:22:30.851Z caller=main.go:557 msg="Notify discovery manager stopped"
+          level=info ts=2020-08-25T14:22:30.851Z caller=manager.go:882 component="rule manager" msg="Stopping rule manager..."
+          level=info ts=2020-08-25T14:22:30.851Z caller=manager.go:892 component="rule manager" msg="Rule manager stopped"
+          level=info ts=2020-08-25T14:22:30.851Z caller=main.go:543 msg="Scrape discovery manager stopped"
+          level=info ts=2020-08-25T14:22:30.851Z caller=main.go:577 msg="Scrape manager stopped"
+          level=info ts=2020-08-25T14:22:30.854Z caller=notifier.go:601 component=notifier msg="Stopping notification manager..."
+          level=info ts=2020-08-25T14:22:30.854Z caller=main.go:749 msg="Notifier manager stopped"
+          level=error ts=2020-08-25T14:22:30.854Z caller=main.go:758 err="error loading config from \"/etc/prometheus/config_out/prometheus.env.yaml\": couldn't load configuration (--config.file=\"/etc/prometheus/config_out/prometheus.env.yaml\"): open /etc/prometheus/config_out/prometheus.env.yaml: no such file or directory"
+        reason: Error
+        startedAt: "2020-08-25T14:22:30Z"
     name: prometheus
     ready: true
-    restartCount: 2
+    restartCount: 1
     started: true
     state:
       running:
-        startedAt: "2020-08-25T01:51:50Z"
-  - containerID: docker://e1d4bc770407062527b5d68da2635aa11e8c914f229ff1fc28ebaf9b4abbefb4
+        startedAt: "2020-08-25T14:23:02Z"
+  - containerID: docker://fa491064201c529cd1c2f0a600686fdd7bbcb6ba16bc347d2c9c276e6a7fe285
     image: quay.io/coreos/prometheus-config-reloader:v0.38.1
     imageID: docker-pullable://quay.io/coreos/prometheus-config-reloader@sha256:d1cce64093d4a850d28726ec3e48403124808f76567b5bd7b26e4416300996a7
-    lastState:
-      terminated:
-        containerID: docker://9b6926791761130ee6de84aee07fbd0511c7f1e92e783dd003d5167e5abc355f
-        exitCode: 2
-        finishedAt: "2020-08-24T12:57:45Z"
-        message: |
-          ts=2020-08-23T15:26:14.423519708Z caller=main.go:85 msg="Starting prometheus-config-reloader version '0.38.1'."
-          level=error ts=2020-08-23T15:26:14.425599686Z caller=runutil.go:98 msg="function failed. Retrying in next tick" err="trigger reload: reload request failed: Post http://127.0.0.1:9090/-/reload: dial tcp 127.0.0.1:9090: connect: connection refused"
-          level=info ts=2020-08-23T15:26:19.485443729Z caller=reloader.go:289 msg="Prometheus reload triggered" cfg_in=/etc/prometheus/config/prometheus.yaml.gz cfg_out=/etc/prometheus/config_out/prometheus.env.yaml rule_dirs=
-          level=info ts=2020-08-23T15:26:19.485500451Z caller=reloader.go:157 msg="started watching config file and non-recursively rule dirs for changes" cfg=/etc/prometheus/config/prometheus.yaml.gz out=/etc/prometheus/config_out/prometheus.env.yaml dirs=
-        reason: Error
-        startedAt: "2020-08-23T15:26:14Z"
+    lastState: {}
     name: prometheus-config-reloader
     ready: true
-    restartCount: 1
+    restartCount: 0
     started: true
     state:
       running:
-        startedAt: "2020-08-25T01:51:50Z"
-  - containerID: docker://207eda71e2330cf49744e265973e6f5f1ebca15a4e9f16d66d09e5252bc33da9
+        startedAt: "2020-08-25T14:23:01Z"
+  - containerID: docker://e55f02fefe9a96b3482afc0f88d8bbb116cb5e5c05418ce5430df760b150bbf2
     image: jimmidyson/configmap-reload:v0.3.0
     imageID: docker-pullable://jimmidyson/configmap-reload@sha256:d107c7a235c266273b1c3502a391fec374430e5625539403d0de797fa9c556a2
-    lastState:
-      terminated:
-        containerID: docker://e174f04b2805d0eac167ab2f54ef097d6058199c7ffc8964a9ac860ab1574736
-        exitCode: 2
-        finishedAt: "2020-08-24T12:57:45Z"
-        message: |
-          2020/08/23 15:26:14 Watching directory: "/etc/prometheus/rules/prometheus-prometheus-prometheus-oper-prometheus-rulefiles-0"
-        reason: Error
-        startedAt: "2020-08-23T15:26:14Z"
+    lastState: {}
     name: rules-configmap-reloader
     ready: true
-    restartCount: 1
+    restartCount: 0
     started: true
     state:
       running:
-        startedAt: "2020-08-25T01:51:50Z"
-  hostIP: 172.17.0.2
+        startedAt: "2020-08-25T14:23:01Z"
+  hostIP: 172.17.0.3
   phase: Running
-  podIP: 172.18.0.7
+  podIP: 172.18.0.10
   podIPs:
-  - ip: 172.18.0.7
+  - ip: 172.18.0.10
   qosClass: Burstable
-  startTime: "2020-08-23T15:24:57Z"
+  startTime: "2020-08-25T14:21:36Z"

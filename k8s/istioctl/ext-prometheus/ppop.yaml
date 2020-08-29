@@ -1,0 +1,291 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2020-08-25T14:20:59Z"
+  generateName: prometheus-prometheus-oper-operator-769d757547-
+  labels:
+    app: prometheus-operator-operator
+    chart: prometheus-operator-9.3.1
+    heritage: Helm
+    pod-template-hash: 769d757547
+    release: prometheus
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:generateName: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:chart: {}
+          f:heritage: {}
+          f:pod-template-hash: {}
+          f:release: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"9ac32ee0-bfe2-4e43-9ae5-07cc8bd3f71b"}:
+            .: {}
+            f:apiVersion: {}
+            f:blockOwnerDeletion: {}
+            f:controller: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        f:containers:
+          k:{"name":"prometheus-operator"}:
+            .: {}
+            f:args: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":8080,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:allowPrivilegeEscalation: {}
+              f:readOnlyRootFilesystem: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+          k:{"name":"tls-proxy"}:
+            .: {}
+            f:args: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:ports:
+              .: {}
+              k:{"containerPort":8443,"protocol":"TCP"}:
+                .: {}
+                f:containerPort: {}
+                f:name: {}
+                f:protocol: {}
+            f:resources: {}
+            f:securityContext:
+              .: {}
+              f:allowPrivilegeEscalation: {}
+              f:readOnlyRootFilesystem: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/cert"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:readOnly: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext:
+          .: {}
+          f:fsGroup: {}
+          f:runAsGroup: {}
+          f:runAsNonRoot: {}
+          f:runAsUser: {}
+        f:serviceAccount: {}
+        f:serviceAccountName: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"tls-proxy-secret"}:
+            .: {}
+            f:name: {}
+            f:secret:
+              .: {}
+              f:defaultMode: {}
+              f:secretName: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2020-08-25T14:20:59Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"172.18.0.6"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2020-08-25T14:21:50Z"
+  name: prometheus-prometheus-oper-operator-769d757547-xvgcp
+  namespace: istio-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: prometheus-prometheus-oper-operator-769d757547
+    uid: 9ac32ee0-bfe2-4e43-9ae5-07cc8bd3f71b
+  resourceVersion: "1128"
+  selfLink: /api/v1/namespaces/istio-system/pods/prometheus-prometheus-oper-operator-769d757547-xvgcp
+  uid: 7d534bae-c289-4f8c-bd7f-eef1e05984d1
+spec:
+  containers:
+  - args:
+    - --manage-crds=true
+    - --kubelet-service=kube-system/prometheus-prometheus-oper-kubelet
+    - --logtostderr=true
+    - --localhost=127.0.0.1
+    - --prometheus-config-reloader=quay.io/coreos/prometheus-config-reloader:v0.38.1
+    - --config-reloader-image=docker.io/jimmidyson/configmap-reload:v0.3.0
+    - --config-reloader-cpu=100m
+    - --config-reloader-memory=25Mi
+    image: quay.io/coreos/prometheus-operator:v0.38.1
+    imagePullPolicy: IfNotPresent
+    name: prometheus-operator
+    ports:
+    - containerPort: 8080
+      name: http
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: prometheus-prometheus-oper-operator-token-f2qmt
+      readOnly: true
+  - args:
+    - server
+    - --listen=:8443
+    - --target=127.0.0.1:8080
+    - --key=cert/key
+    - --cert=cert/cert
+    - --disable-authentication
+    image: squareup/ghostunnel:v1.5.2
+    imagePullPolicy: IfNotPresent
+    name: tls-proxy
+    ports:
+    - containerPort: 8443
+      name: https
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /cert
+      name: tls-proxy-secret
+      readOnly: true
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: prometheus-prometheus-oper-operator-token-f2qmt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    runAsUser: 65534
+  serviceAccount: prometheus-prometheus-oper-operator
+  serviceAccountName: prometheus-prometheus-oper-operator
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: tls-proxy-secret
+    secret:
+      defaultMode: 420
+      secretName: prometheus-prometheus-oper-admission
+  - name: prometheus-prometheus-oper-operator-token-f2qmt
+    secret:
+      defaultMode: 420
+      secretName: prometheus-prometheus-oper-operator-token-f2qmt
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2020-08-25T14:20:59Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2020-08-25T14:21:50Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2020-08-25T14:21:50Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2020-08-25T14:20:59Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://2cf9bac67eea5d8d58f14aad58264341dc390b0e5b1da63f0cf69a8bfa22578a
+    image: quay.io/coreos/prometheus-operator:v0.38.1
+    imageID: docker-pullable://quay.io/coreos/prometheus-operator@sha256:62b8cf466e9b238a9fcf0bcba74562c8833e7451042321e323a46de3f1dbe1bc
+    lastState: {}
+    name: prometheus-operator
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2020-08-25T14:21:22Z"
+  - containerID: docker://53a4ecc424b7b4242f45ca3000bea4a4138c8e6d7647c6455a297d54bdc8110a
+    image: squareup/ghostunnel:v1.5.2
+    imageID: docker-pullable://squareup/ghostunnel@sha256:70f4cf270425dee074f49626ec63fc96e6712e9c0eedf127e7254e8132d25063
+    lastState: {}
+    name: tls-proxy
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2020-08-25T14:21:49Z"
+  hostIP: 172.17.0.3
+  phase: Running
+  podIP: 172.18.0.6
+  podIPs:
+  - ip: 172.18.0.6
+  qosClass: BestEffort
+  startTime: "2020-08-25T14:20:59Z"
