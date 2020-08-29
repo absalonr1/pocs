@@ -39,3 +39,9 @@ writing RSA key
 (stdin)= 5c:ca:63:c3:0e:0c:e9:50:3d:83:ba:66:9d:79:87:25
 
 $ oci streaming admin stream list --compartment-id $Compartment_OCID --lifecycle-state active
+
+TOKEN
+
+719O:pwpCN74s487nKLJ
+
+
