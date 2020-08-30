@@ -2,6 +2,7 @@ package aopazo.ocistreaming;
 
 import java.util.Properties;
 import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -17,6 +18,7 @@ public class OCIStreamingProducer {
       String authToken ="719O:pwpCN74s487nKLJ";
       
       Properties properties = new Properties();
+      properties.put(ProducerConfig.ACKS_CONFIG, "all");
       properties.put("bootstrap.servers", "cell-1.streaming.us-ashburn-1.oci.oraclecloud.com:9092");
       properties.put("security.protocol", "SASL_SSL");
       properties.put("sasl.mechanism", "PLAIN");
@@ -30,12 +32,14 @@ public class OCIStreamingProducer {
 
       Producer<String, String> producer = new KafkaProducer<String, String>(properties);
 
-      for(int i = 0; i < 10; i++){
+      for(int i = 0; i < 100; i++){
+         long time = System.currentTimeMillis();
          producer.send(new ProducerRecord<String, String>(topicName, 
-            Integer.toString(i), Integer.toString(i))
+         "key-" + i +"-"+time, "message-"+i )
          );
-         System.out.println("Message sent successfully");
+         
       }
+      System.out.println("Messages sent successfully");
       producer.close();
    }
 }
