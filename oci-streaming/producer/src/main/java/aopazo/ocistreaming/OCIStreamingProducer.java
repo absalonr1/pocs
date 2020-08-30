@@ -10,12 +10,8 @@ public class OCIStreamingProducer {
 
    public static void main(String[] args) throws Exception{
 
-      String topicName = "stream-demo";
       
-      String tenancyName ="ocid1.tenancy.oc1..aaaaaaaahww27qgv44s5ibdur2pdshfheobg7je6rsawkqwr3wrilff7mn4q";
-      String username ="oracleidentitycloudservice/luisopazo@gmail.com";
-      String stream_pool_OCID ="ocid1.streampool.oc1.iad.amaaaaaafnixjbyapenbnk4od4gyuzg3jv5j364dd5odnggdkv3f7go75mma";
-      String authToken ="719O:pwpCN74s487nKLJ";
+      String topicName = "stream-demo";
       
       Properties properties = new Properties();
       properties.put(ProducerConfig.ACKS_CONFIG, "all");
@@ -32,14 +28,16 @@ public class OCIStreamingProducer {
 
       Producer<String, String> producer = new KafkaProducer<String, String>(properties);
 
-      for(int i = 0; i < 100; i++){
+      long t1=System.currentTimeMillis();
+      int numMsgs = 1000;
+      for(int i = 0; i < numMsgs; i++){
          long time = System.currentTimeMillis();
          producer.send(new ProducerRecord<String, String>(topicName, 
          "key-" + i +"-"+time, "message-"+i )
          );
          
       }
-      System.out.println("Messages sent successfully");
+      System.out.println(numMsgs+ " messages sent successfully in "+( (System.currentTimeMillis()-t1)/1000 )+" seconds.");
       producer.close();
    }
 }
