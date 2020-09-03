@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-producer
+  name: test-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-producer
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: test-producer
+        version: "1"
+    spec:
+      containers:
+      - image: iad.ocir.io/tdecloud/tdecloud_repository/test-producer-env-var:1
+        name: container-test-prdocuer
+        env:
+        - name: BOOTSTRAP_SERVER
+          value: "uubidt7cepoq.streaming.us-ashburn-1.oci.oraclecloud.com:9092"
+        - name: ACKS_CONFIG
+          value: "all"
+        - name: NUM_MSG
+          value: "1000"
+        - name: REQUEST_TIMEOUT_MS
+          value: "5000"
+        - name: METADATA_FETCH_TIMEOUT_MS
+          value: "5000"
+        - name: SECURITY_PROTOCOL
+          value: "SASL_SSL"
+        - name: SASL_MECHANISM
+          value: "PLAIN"
+        - name: SASL_JAAS_CONFIG
+          value: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"tdecloud/app_microservicios_poc/ocid1.streampool.oc1.iad.amaaaaaa4u3umwqaku3jfqaxmk3vblcuggccfzsyuvap7oxcuubidt7cepoq\" password=\"GbZfF1-Pc.V-cseMGG5i\";"
+        - name: TOPIC_NAME
+          value: "stream_microservicios_poc"
+        imagePullPolicy: Always
+        resources: {}
+      imagePullSecrets:
+      - name: ocir
