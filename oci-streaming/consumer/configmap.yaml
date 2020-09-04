@@ -12,11 +12,14 @@ data:
   SASL_MECHANISM: "PLAIN"
   SASL_JAAS_CONFIG: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"tdecloud/app_microservicios_poc/ocid1.streampool.oc1.iad.amaaaaaa4u3umwqaku3jfqaxmk3vblcuggccfzsyuvap7oxcuubidt7cepoq\" password=\"GbZfF1-Pc.V-cseMGG5i\";"
   TOPIC_NAME: "stream_microservicios_poc"
-  GROUP_ID: "group-0"
+  GROUP_ID: "group-1"
   ENABLE_AUTO_COMMIT: "false"
   AUTO_COMMIT_INTERVAL_MS: "500"
   SESSION_TIMEOUT_MS: "3000"
   POLL_TIMEOUT_MS: "2000"
   HEARTBEAT_INTERVAL_MS: "600"
+  AUTO_OFFSET_RESET: "latest" # latest | earliest
+  MAX_POLL_INTERVAL_MS: "10000"
+  MAX_POLL_RECORDS: "100" # max.poll.records
   player_initial_lives: "3"
   ui_properties_file_name: "user-interface.properties"
