@@ -6,6 +6,13 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
+import org.apache.kafka.clients.admin.DescribeConfigsResult;
+import org.apache.kafka.common.Node;
+import org.apache.kafka.common.config.ConfigResource;
+import java.util.Collections;
+
 public class OCIStreamingProducer {
 
    public static void main(String[] args) throws Exception{
@@ -36,7 +43,25 @@ public class OCIStreamingProducer {
       System.out.println("Configuracion: "+properties);
       System.out.println("topicName: "+topicName);
       Producer<String, String> producer = new KafkaProducer<String, String>(properties);
-
+      /** 
+         try{
+            // Configuracion de los brokers
+            Properties config = new Properties();
+            config.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, System.getenv("BOOTSTRAP_SERVER"));
+            AdminClient admin = AdminClient.create(config);
+            for (Node node : admin.describeCluster().nodes().get()) {
+                  System.out.println("-- node: " + node.id() + " --");
+                  ConfigResource cr = new ConfigResource(ConfigResource.Type.BROKER, "0");
+                  DescribeConfigsResult dcr = admin.describeConfigs(Collections.singleton(cr));
+                  dcr.all().get().forEach((k, c) -> {
+                     c.entries()
+                     .forEach(configEntry -> {System.out.println(configEntry.name() + "= " + configEntry.value());});
+                  });
+            }
+         }catch (Exception e){
+            e.printStackTrace();
+         }
+      */
       long t1=System.currentTimeMillis();
       int numMsgs = Integer.valueOf(System.getenv("NUM_MSG"));
 

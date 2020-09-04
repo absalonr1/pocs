@@ -6,7 +6,7 @@ metadata:
     app: test-consumer-pod
 spec:
   containers:
-  - image: iad.ocir.io/tdecloud/tdecloud_repository/test-consumer-env-var:5
+  - image: iad.ocir.io/tdecloud/tdecloud_repository/test-consumer-env-var:7
     name: container-test-prdocuer
     env:
     - name: BOOTSTRAP_SERVER
@@ -84,6 +84,16 @@ spec:
         configMapKeyRef:
           name: consumer-cm
           key: HEARTBEAT_INTERVAL_MS
+    - name: AUTO_OFFSET_RESET
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: AUTO_OFFSET_RESET
+    - name: MAX_POLL_INTERVAL_MS
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: MAX_POLL_INTERVAL_MS
     imagePullPolicy: Always
     resources: {}
   imagePullSecrets:

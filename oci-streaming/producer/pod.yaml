@@ -6,7 +6,7 @@ metadata:
     app: test-producer-pod
 spec:
   containers:
-  - image: iad.ocir.io/tdecloud/tdecloud_repository/test-producer-env-var:1
+  - image: iad.ocir.io/tdecloud/tdecloud_repository/test-producer-env-var:3
     name: container-test-prdocuer
     env:
     - name: BOOTSTRAP_SERVER
@@ -14,7 +14,7 @@ spec:
     - name: ACKS_CONFIG
       value: "all"
     - name: NUM_MSG
-      value: "1000"
+      value: "100000"
     - name: REQUEST_TIMEOUT_MS
       value: "5000"
     - name: METADATA_FETCH_TIMEOUT_MS
