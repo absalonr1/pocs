@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-consumer-pod
+  labels:
+    app: test-consumer-pod
+spec:
+  containers:
+  - image: iad.ocir.io/tdecloud/tdecloud_repository/test-consumer-env-var:5
+    name: container-test-prdocuer
+    env:
+    - name: BOOTSTRAP_SERVER
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: BOOTSTRAP_SERVER
+    - name: ACKS_CONFIG
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: ACKS_CONFIG
+    - name: NUM_MSG
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: NUM_MSG
+    - name: REQUEST_TIMEOUT_MS
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: REQUEST_TIMEOUT_MS
+    - name: METADATA_FETCH_TIMEOUT_MS
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: METADATA_FETCH_TIMEOUT_MS
+    - name: SECURITY_PROTOCOL
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: SECURITY_PROTOCOL
+    - name: SASL_MECHANISM
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: SASL_MECHANISM
+    - name: SASL_JAAS_CONFIG
+      valueFrom:
+          configMapKeyRef:
+            name: consumer-cm
+            key: SASL_JAAS_CONFIG
+    - name: TOPIC_NAME
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: TOPIC_NAME
+    - name: GROUP_ID
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: GROUP_ID
+    - name: ENABLE_AUTO_COMMIT
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: ENABLE_AUTO_COMMIT
+    - name: AUTO_COMMIT_INTERVAL_MS
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: AUTO_COMMIT_INTERVAL_MS
+    - name: SESSION_TIMEOUT_MS
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: SESSION_TIMEOUT_MS
+    - name: POLL_TIMEOUT_MS
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: POLL_TIMEOUT_MS
+    - name: HEARTBEAT_INTERVAL_MS
+      valueFrom:
+        configMapKeyRef:
+          name: consumer-cm
+          key: HEARTBEAT_INTERVAL_MS
+    imagePullPolicy: Always
+    resources: {}
+  imagePullSecrets:
+  - name: ocir
+  restartPolicy: Never

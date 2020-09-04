@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: consumer-cm
+data:
+  BOOTSTRAP_SERVER: "uubidt7cepoq.streaming.us-ashburn-1.oci.oraclecloud.com:9092"
+  ACKS_CONFIG: "all"
+  NUM_MSG: "1000"
+  REQUEST_TIMEOUT_MS: "5000"
+  METADATA_FETCH_TIMEOUT_MS: "5000"
+  SECURITY_PROTOCOL: "SASL_SSL"
+  SASL_MECHANISM: "PLAIN"
+  SASL_JAAS_CONFIG: "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"tdecloud/app_microservicios_poc/ocid1.streampool.oc1.iad.amaaaaaa4u3umwqaku3jfqaxmk3vblcuggccfzsyuvap7oxcuubidt7cepoq\" password=\"GbZfF1-Pc.V-cseMGG5i\";"
+  TOPIC_NAME: "stream_microservicios_poc"
+  GROUP_ID: "group-0"
+  ENABLE_AUTO_COMMIT: "false"
+  AUTO_COMMIT_INTERVAL_MS: "500"
+  SESSION_TIMEOUT_MS: "3000"
+  POLL_TIMEOUT_MS: "2000"
+  HEARTBEAT_INTERVAL_MS: "600"
+  player_initial_lives: "3"
+  ui_properties_file_name: "user-interface.properties"
