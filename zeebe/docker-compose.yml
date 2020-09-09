@@ -1,0 +1,15 @@
+version: '2.2'
+
+services:
+    broker:
+        image: camunda/zeebe:0.24.2
+        container_name: zeebe-broker
+        restart: "on-failure"
+        hostname: zeebe-broker
+        ports:
+            - "26500:26500"
+            - "9600:9600"
+
+    worker:
+        build: .
+        command: "zeebe-broker:26500"
