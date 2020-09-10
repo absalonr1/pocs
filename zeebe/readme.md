@@ -1,28 +1,40 @@
-absalon@pc-absalon:~$ helm install zeebe-cluster zeebe/zeebe-cluster
-NAME: zeebe-cluster
-LAST DEPLOYED: Tue Sep  8 09:54:51 2020
-NAMESPACE: default
-STATUS: deployed
-REVISION: 1
-NOTES:
-______     ______     ______     ______     ______    
-/\___  \   /\  ___\   /\  ___\   /\  == \   /\  ___\   
-\/_/  /__  \ \  __\   \ \  __\   \ \  __<   \ \  __\   
-  /\_____\  \ \_____\  \ \_____\  \ \_____\  \ \_____\ 
-  \/_____/   \/_____/   \/_____/   \/_____/   \/_____/                                                                                                                                      
+https://github.com/zeebe-io/zeebe-docker-compose
 
-(zeebe-cluster - 0.0.128)
+Profile: simple-monitor - a single node Zeebe broker with Simple Monitor
 
-- Docker Image used for Broker: camunda/zeebe:0.23.4
-- Cluster Name: "zeebe-cluster-zeebe"
-- ElasticSearch Enabled: true - URL: http://elasticsearch-master:9200
-- Kibana Enabled: false
-- Prometheus Enabled: false
-- Prometheus ServiceMonitor Enabled: false
+$ docker-compose up
 
-The Cluster itself is not exposed as a service that means that you can use kubectl port-forward to access the Zeebe cluster from outside Kubernetes:
+Install zbctl
+  chmod +x
+  mover a /usr/local/bin
 
-> kubectl port-forward svc/zeebe-cluster-zeebe-gateway 26500:26500 -n default
+/git-root/pocs/zeebe/src/main/resources$ zbctl deploy order-process.bpmn --insecure
 
-Now you can connect your workers and clients to `localhost:26500`
+{
+  "key": 2251799813685250,
+  "workflows": [
+    {
+      "bpmnProcessId": "order-process",
+      "version": 1,
+      "workflowKey": 2251799813685249,
+      "resourceName": "order-process.bpmn"
+    }
+  ]
+}
 
+zbctl create instance order-process --variables "{\"emergencyReason\" : \"person\"}" --insecure
+
+{
+  "workflowKey": 2251799813685249,
+  "bpmnProcessId": "order-process",
+  "version": 1,
+  "workflowInstanceKey": 2251799813685251
+}
+
+
+https://zeebe.io/blog/2019/10/0.21-release/#tls
+export ZEEBE_INSECURE_CONNECTION=true
+
+mvn spring-boot:run
+
+~/git-root/pocs/zeebe/simple-monitor-cluster/simple-monitor$ docker-compose down
