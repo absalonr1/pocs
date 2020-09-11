@@ -16,7 +16,9 @@ import java.time.Instant;
 public class DemoApplication {
 
     public static void main(String[] args) {
-        System.out.println("Starting demo worker...");
+        System.out.println("###############################...");
+        System.out.println("#####      Starting demo worker...");
+        System.out.println("###############################...");
         SpringApplication.run(DemoApplication.class, args);
     }
 
@@ -27,13 +29,19 @@ public class DemoApplication {
         
         logJob(job);
         if (job.getVariablesAsMap().get("emergencyReason") == null) { // default to ambulance if no reason is provided
-            System.out.println("null...");
+            System.out.println("###############################...");
+            System.out.println("#####      null...");
+            System.out.println("###############################...");
             client.newCompleteCommand(job.getKey()).variables("{\"emergencyType\": \"Injured\"}").send().join();
         }else if (job.getVariablesAsMap().get("emergencyReason").toString().contains("")) {
-            System.out.println("person...");
+            System.out.println("###############################...");
+            System.out.println("#####     person...");
+            System.out.println("###############################...");
             client.newCompleteCommand(job.getKey()).variables("{\"emergencyType\": \"Injured\"}").send().join();
         } else if (job.getVariablesAsMap().get("emergencyReason").toString().contains("fire")) {
-            System.out.println("fire...");
+            System.out.println("###############################...");
+            System.out.println("#####      Starting demo worker...");
+            System.out.println("###############################...");
             client.newCompleteCommand(job.getKey()).variables("{\"emergencyType\": \"Fire\"}").send().join();
         }
     }
