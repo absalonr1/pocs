@@ -30,7 +30,7 @@ Install zbctl
 # ----- 4 -------
 # ---------------
 
-/git-root/pocs/zeebe/src/main/resources$ zbctl deploy order-process.bpmn --insecure
+zbctl deploy $HOME/git-root/pocs/zeebe/src/main/resources/order-process.bpmn --insecure
 
 {
   "key": 2251799813685250,
