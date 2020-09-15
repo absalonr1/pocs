@@ -62,8 +62,9 @@ zbctl create instance order-process --variables "{\"emergencyReason\" : \"person
 # ---------------
 
 https://zeebe.io/blog/2019/10/0.21-release/#tls
-export ZEEBE_INSECURE_CONNECTION=true
-/home/absalon/git-root/pocs/zeebe-demo-worker/$ mvn spring-boot:run
+$ export ZEEBE_INSECURE_CONNECTION=true
+$ cd /home/absalon/git-root/pocs/zeebe-demo-worker/
+$ mvn spring-boot:run
 
 
 # ---------------
