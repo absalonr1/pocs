@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "zeebe"
+		},
+		{
+			"path": "zeebe-docker-compose"
+		},
+		{
+			"path": "zeebe-demo-worker"
+		},
+		{
+			"path": "zeebek8s"
+		},
+		{
+			"path": "zeebe-cluster-0.0.128-chart"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}

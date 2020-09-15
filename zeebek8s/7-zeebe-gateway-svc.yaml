@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "zeebe-cluster-zeebe-gateway"
+spec:
+  selector:
+      app.kubernetes.io/component: gateway
+  ports:
+    - port: 9600
+      protocol: TCP
+      name: http
+    - port: 26500
+      protocol: TCP
+      name: gateway
