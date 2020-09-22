@@ -3,8 +3,8 @@ global:
   scrape_timeout: 10s
   evaluation_interval: 30s
   external_labels:
-    prometheus: istio-system/prometheus-prometheus-oper-prometheus
-    prometheus_replica: prometheus-prometheus-prometheus-oper-prometheus-0
+    prometheus: default/prometheus-kube-stack-rel-prometheus
+    prometheus_replica: prometheus-prometheus-kube-stack-rel-prometheus-0
 alerting:
   alert_relabel_configs:
   - separator: ;
@@ -16,7 +16,7 @@ alerting:
     - role: endpoints
       namespaces:
         names:
-        - istio-system
+        - default
     scheme: http
     path_prefix: /
     timeout: 10s
@@ -24,7 +24,7 @@ alerting:
     relabel_configs:
     - source_labels: [__meta_kubernetes_service_name]
       separator: ;
-      regex: prometheus-prometheus-oper-alertmanager
+      regex: prometheus-kube-stack-rel-alertmanager
       replacement: $1
       action: keep
     - source_labels: [__meta_kubernetes_endpoint_port_name]
@@ -33,9 +33,9 @@ alerting:
       replacement: $1
       action: keep
 rule_files:
-- /etc/prometheus/rules/prometheus-prometheus-prometheus-oper-prometheus-rulefiles-0/*.yaml
+- /etc/prometheus/rules/prometheus-prometheus-kube-stack-rel-prometheus-rulefiles-0/*.yaml
 scrape_configs:
-- job_name: istio-system/prometheus-prometheus-oper-alertmanager/0
+- job_name: default/prometheus-kube-stack-rel-alertmanager/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -45,16 +45,16 @@ scrape_configs:
   - role: endpoints
     namespaces:
       names:
-      - istio-system
+      - default
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
-    regex: prometheus-operator-alertmanager
+    regex: kube-prometheus-stack-alertmanager
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_self_monitor]
@@ -108,7 +108,7 @@ scrape_configs:
     target_label: endpoint
     replacement: web
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-apiserver/0
+- job_name: default/prometheus-kube-stack-rel-apiserver/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -187,7 +187,7 @@ scrape_configs:
     target_label: endpoint
     replacement: https
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-coredns/0
+- job_name: default/prometheus-kube-stack-rel-coredns/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -202,12 +202,12 @@ scrape_configs:
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
-    regex: prometheus-operator-coredns
+    regex: kube-prometheus-stack-coredns
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_endpoint_port_name]
@@ -262,7 +262,7 @@ scrape_configs:
     target_label: endpoint
     replacement: http-metrics
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-grafana/0
+- job_name: default/prometheus-kube-stack-rel-grafana/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -272,11 +272,11 @@ scrape_configs:
   - role: endpoints
     namespaces:
       names:
-      - istio-system
+      - default
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_instance]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_name]
@@ -330,7 +330,7 @@ scrape_configs:
     target_label: endpoint
     replacement: service
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kube-controller-manager/0
+- job_name: default/prometheus-kube-stack-rel-kube-controller-manager/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -345,12 +345,12 @@ scrape_configs:
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
-    regex: prometheus-operator-kube-controller-manager
+    regex: kube-prometheus-stack-kube-controller-manager
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_endpoint_port_name]
@@ -405,7 +405,7 @@ scrape_configs:
     target_label: endpoint
     replacement: http-metrics
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kube-etcd/0
+- job_name: default/prometheus-kube-stack-rel-kube-etcd/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -420,12 +420,12 @@ scrape_configs:
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
-    regex: prometheus-operator-kube-etcd
+    regex: kube-prometheus-stack-kube-etcd
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_endpoint_port_name]
@@ -480,7 +480,7 @@ scrape_configs:
     target_label: endpoint
     replacement: http-metrics
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kube-proxy/0
+- job_name: default/prometheus-kube-stack-rel-kube-proxy/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -495,12 +495,12 @@ scrape_configs:
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
-    regex: prometheus-operator-kube-proxy
+    regex: kube-prometheus-stack-kube-proxy
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_endpoint_port_name]
@@ -555,7 +555,7 @@ scrape_configs:
     target_label: endpoint
     replacement: http-metrics
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kube-scheduler/0
+- job_name: default/prometheus-kube-stack-rel-kube-scheduler/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -570,12 +570,12 @@ scrape_configs:
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
-    regex: prometheus-operator-kube-scheduler
+    regex: kube-prometheus-stack-kube-scheduler
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_endpoint_port_name]
@@ -630,7 +630,7 @@ scrape_configs:
     target_label: endpoint
     replacement: http-metrics
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kube-state-metrics/0
+- job_name: default/prometheus-kube-stack-rel-kube-state-metrics/0
   honor_labels: true
   honor_timestamps: true
   scrape_interval: 30s
@@ -641,11 +641,11 @@ scrape_configs:
   - role: endpoints
     namespaces:
       names:
-      - istio-system
+      - default
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_instance]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_name]
@@ -705,7 +705,7 @@ scrape_configs:
     target_label: endpoint
     replacement: http
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kubelet/0
+- job_name: default/prometheus-kube-stack-rel-kubelet/0
   honor_labels: true
   honor_timestamps: true
   scrape_interval: 30s
@@ -785,7 +785,7 @@ scrape_configs:
     target_label: metrics_path
     replacement: $1
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kubelet/1
+- job_name: default/prometheus-kube-stack-rel-kubelet/1
   honor_labels: true
   honor_timestamps: true
   scrape_interval: 30s
@@ -865,7 +865,7 @@ scrape_configs:
     target_label: metrics_path
     replacement: $1
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kubelet/2
+- job_name: default/prometheus-kube-stack-rel-kubelet/2
   honor_labels: true
   honor_timestamps: true
   scrape_interval: 30s
@@ -945,7 +945,7 @@ scrape_configs:
     target_label: metrics_path
     replacement: $1
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-kubelet/3
+- job_name: default/prometheus-kube-stack-rel-kubelet/3
   honor_labels: true
   honor_timestamps: true
   scrape_interval: 30s
@@ -1025,7 +1025,7 @@ scrape_configs:
     target_label: metrics_path
     replacement: $1
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-node-exporter/0
+- job_name: default/prometheus-kube-stack-rel-node-exporter/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -1035,7 +1035,7 @@ scrape_configs:
   - role: endpoints
     namespaces:
       names:
-      - istio-system
+      - default
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
@@ -1044,7 +1044,7 @@ scrape_configs:
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_endpoint_port_name]
@@ -1099,7 +1099,7 @@ scrape_configs:
     target_label: endpoint
     replacement: metrics
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-operator/0
+- job_name: default/prometheus-kube-stack-rel-operator/0
   honor_labels: true
   honor_timestamps: true
   scrape_interval: 30s
@@ -1110,16 +1110,16 @@ scrape_configs:
   - role: endpoints
     namespaces:
       names:
-      - istio-system
+      - default
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
-    regex: prometheus-operator-operator
+    regex: kube-prometheus-stack-operator
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_endpoint_port_name]
@@ -1168,7 +1168,7 @@ scrape_configs:
     target_label: endpoint
     replacement: http
     action: replace
-- job_name: istio-system/prometheus-prometheus-oper-prometheus/0
+- job_name: default/prometheus-kube-stack-rel-prometheus/0
   honor_timestamps: true
   scrape_interval: 30s
   scrape_timeout: 10s
@@ -1178,16 +1178,16 @@ scrape_configs:
   - role: endpoints
     namespaces:
       names:
-      - istio-system
+      - default
   relabel_configs:
   - source_labels: [__meta_kubernetes_service_label_app]
     separator: ;
-    regex: prometheus-operator-prometheus
+    regex: kube-prometheus-stack-prometheus
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_release]
     separator: ;
-    regex: prometheus
+    regex: prometheus-kube-stack-rel
     replacement: $1
     action: keep
   - source_labels: [__meta_kubernetes_service_label_self_monitor]
