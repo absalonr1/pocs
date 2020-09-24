@@ -1,0 +1,597 @@
+NAME: my-release
+LAST DEPLOYED: Wed Sep 23 17:46:43 2020
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+USER-SUPPLIED VALUES:
+cluster:
+  memberCount: 3
+
+COMPUTED VALUES:
+affinity: null
+annotations: {}
+cluster:
+  memberCount: 3
+gracefulShutdown:
+  enabled: true
+  maxWaitSeconds: 600
+hazelcast:
+  javaOpts: null
+  yaml:
+    hazelcast:
+      network:
+        join:
+          kubernetes:
+            enabled: true
+            namespace: ${namespace}
+            service-name: ${serviceName}
+          multicast:
+            enabled: false
+        rest-api:
+          enabled: true
+          endpoint-groups:
+            HEALTH_CHECK:
+              enabled: true
+image:
+  pullPolicy: IfNotPresent
+  repository: hazelcast/hazelcast
+  tag: 4.0.2
+livenessProbe:
+  enabled: true
+  failureThreshold: 10
+  initialDelaySeconds: 30
+  path: /hazelcast/health/node-state
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 10
+mancenter:
+  annotations: {}
+  contextPath: null
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+    repository: hazelcast/management-center
+    tag: 4.2020.08
+  ingress:
+    annotations: {}
+    enabled: false
+  javaOpts: null
+  licenseKey: null
+  livenessProbe:
+    enabled: true
+    failureThreshold: 3
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  nodeSelector: {}
+  persistence:
+    accessModes:
+    - ReadWriteOnce
+    enabled: true
+    size: 8Gi
+  readinessProbe:
+    enabled: true
+    failureThreshold: 3
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
+  service:
+    annotations: {}
+    httpsPort: 443
+    port: 8080
+    type: LoadBalancer
+  ssl: false
+  yaml:
+    hazelcast-client:
+      network:
+        kubernetes:
+          enabled: true
+          namespace: ${namespace}
+          service-name: ${serviceName}
+metrics:
+  enabled: false
+  service:
+    annotations:
+      prometheus.io/path: /metrics
+      prometheus.io/port: "8080"
+      prometheus.io/scrape: "true"
+    port: 8080
+    type: ClusterIP
+nodeSelector: {}
+rbac:
+  create: true
+readinessProbe:
+  enabled: true
+  failureThreshold: 10
+  initialDelaySeconds: 30
+  path: /hazelcast/health/ready
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 10
+securityContext:
+  enabled: true
+  fsGroup: 65534
+  readOnlyRootFilesystem: true
+  runAsGroup: 65534
+  runAsUser: 65534
+service:
+  clusterIP: None
+  create: true
+  port: 5701
+  type: ClusterIP
+serviceAccount:
+  create: true
+  name: null
+
+HOOKS:
+---
+# Source: hazelcast/templates/tests/test-hazelcast.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "my-release-hazelcast-test-qik9y"
+  annotations:
+    "helm.sh/hook": test-success
+    "helm.sh/hook-delete-policy": hook-succeeded, hook-failed
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/component: "test"
+    role: test
+spec:
+  hostNetwork: false
+  hostPID: false
+  hostIPC: false
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
+  containers:
+  - name: "my-release-hazelcast-test"
+    image: "hazelcast/hazelcast:4.0.2"
+    command:
+    - "bash"
+    - "-c"
+    - |
+      set -ex
+      # Get the number of Hazelcast members in the cluster
+      CLUSTER_SIZE=$(curl my-release-hazelcast:5701/hazelcast/health/cluster-size)
+      # Test the currect number of Hazelcast members
+      test ${CLUSTER_SIZE} -eq 3
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1001
+      runAsGroup: 1001
+      privileged: false
+      readOnlyRootFilesystem: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+  restartPolicy: Never
+---
+# Source: hazelcast/templates/tests/test-management-center.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "my-release-hazelcast-mancenter-test-oddx2"
+  annotations:
+    "helm.sh/hook": test-success
+    "helm.sh/hook-delete-policy": hook-succeeded, hook-failed
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/component: "test"
+    role: test
+spec:
+  hostNetwork: false
+  hostPID: false
+  hostIPC: false
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
+  containers:
+  - name: "my-release-hazelcast-mancenter-test"
+    image: "hazelcast/hazelcast:4.0.2"
+    command:
+    - "bash"
+    - "-c"
+    - |
+      set -ex
+      # Get the HTTP Response Code of the Health Check
+      HEALTH_CHECK_HTTP_RESPONSE_CODE=$(curl --write-out %{http_code} --silent --output /dev/null my-release-hazelcast-mancenter:8080/health)
+      # Test the currect number of Hazelcast members
+      test ${HEALTH_CHECK_HTTP_RESPONSE_CODE} -eq 200
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1001
+      runAsGroup: 1001
+      privileged: false
+      readOnlyRootFilesystem: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+  restartPolicy: Never
+MANIFEST:
+---
+# Source: hazelcast/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-release-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+---
+# Source: hazelcast/templates/config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-release-hazelcast-configuration
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+data:
+  hazelcast.yaml: |-
+    hazelcast:
+      network:
+        join:
+          kubernetes:
+            enabled: true
+            namespace: ${namespace}
+            service-name: ${serviceName}
+          multicast:
+            enabled: false
+        rest-api:
+          enabled: true
+          endpoint-groups:
+            HEALTH_CHECK:
+              enabled: true
+---
+# Source: hazelcast/templates/mancenter-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-release-hazelcast-mancenter-configuration
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+data:
+  hazelcast-client.yaml: |-
+    hazelcast-client:
+      network:
+        kubernetes:
+          enabled: true
+          namespace: ${namespace}
+          service-name: ${serviceName}
+---
+# Source: hazelcast/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: my-release-hazelcast-default
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  - pods
+  - nodes
+  verbs:
+  - get
+  - list
+---
+# Source: hazelcast/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: my-release-hazelcast-default
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: my-release-hazelcast-default
+subjects:
+- kind: ServiceAccount
+  name: my-release-hazelcast
+  namespace: default
+---
+# Source: hazelcast/templates/mancenter-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-release-hazelcast-mancenter
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: hazelcast
+    app.kubernetes.io/instance: "my-release"
+    role: mancenter
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: mancenter
+    name: http
+  - protocol: TCP
+    port: 443
+    targetPort: mancenter
+    name: https
+---
+# Source: hazelcast/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-release-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: hazelcast
+    app.kubernetes.io/instance: "my-release"
+    role: hazelcast
+  ports:
+  - protocol: TCP
+    port: 5701
+    targetPort: hazelcast
+    name: hzport
+---
+# Source: hazelcast/templates/mancenter-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-release-hazelcast-mancenter
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  serviceName: my-release-hazelcast-mancenter
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hazelcast
+      app.kubernetes.io/instance: "my-release"
+      role: mancenter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hazelcast
+        helm.sh/chart: hazelcast-3.4.9
+        app.kubernetes.io/instance: "my-release"
+        app.kubernetes.io/managed-by: "Helm"
+        role: mancenter
+    spec:
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+      containers:
+      - name: my-release-hazelcast-mancenter
+        image: "hazelcast/management-center:4.2020.08"
+        imagePullPolicy: "IfNotPresent"
+        resources:
+          null
+        ports:
+        - name: mancenter
+          containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: mancenter-storage
+          mountPath: /data
+        env:
+        - name: MC_LICENSE_KEY
+          value: 
+        - name: MC_INIT_CMD
+          value: "./mc-conf.sh cluster add --lenient=true -H /data -cc /config/hazelcast-client.yaml"
+        - name: JAVA_OPTS
+          value: " -Dhazelcast.mc.healthCheck.enable=true -DserviceName=my-release-hazelcast -Dnamespace=default -Dhazelcast.mc.tls.enabled=false "
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          runAsGroup: 65534
+          privileged: false
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      securityContext:
+        fsGroup: 65534
+      serviceAccountName: my-release-hazelcast
+      volumes:
+      - name: config
+        configMap:
+           name: my-release-hazelcast-mancenter-configuration
+      - name: mancenter-storage
+    
+  volumeClaimTemplates:
+  - metadata:
+      name: mancenter-storage
+      labels:
+        app.kubernetes.io/name: hazelcast
+        helm.sh/chart: "hazelcast-3.4.9"
+        app.kubernetes.io/instance: "my-release"
+        app.kubernetes.io/managed-by: "Helm"
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "8Gi"
+---
+# Source: hazelcast/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-release-hazelcast
+  labels:
+    app.kubernetes.io/name: hazelcast
+    helm.sh/chart: hazelcast-3.4.9
+    app.kubernetes.io/instance: "my-release"
+    app.kubernetes.io/managed-by: "Helm"
+spec:
+  serviceName: my-release-hazelcast
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: hazelcast
+      app.kubernetes.io/instance: "my-release"
+      role: hazelcast
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: hazelcast
+        helm.sh/chart: hazelcast-3.4.9
+        app.kubernetes.io/instance: "my-release"
+        app.kubernetes.io/managed-by: "Helm"
+        role: hazelcast
+      annotations:
+        checksum/hazelcast-config: b6d39a9c43a56af9ebb59e1a70e6467460996d848dabf9789e06e7e817f5ff37
+    spec:
+      terminationGracePeriodSeconds: 600
+      hostNetwork: false
+      hostPID: false
+      hostIPC: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+      containers:
+      - name: my-release-hazelcast
+        image: "hazelcast/hazelcast:4.0.2"
+        imagePullPolicy: "IfNotPresent"
+        resources:
+          null
+        ports:
+        - name: hazelcast
+          containerPort: 5701
+          hostPort: 
+        livenessProbe:
+          httpGet:
+            path: /hazelcast/health/node-state
+            port: 5701
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 10
+        readinessProbe:
+          httpGet:
+            path: /hazelcast/health/ready
+            port: 5701
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 10
+        volumeMounts:
+        - name: hazelcast-storage
+          mountPath: /data/hazelcast
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: JAVA_OPTS
+          value: "-Dhazelcast.config=/data/hazelcast/hazelcast.yaml -DserviceName=my-release-hazelcast -Dnamespace=default -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.shutdownhook.enabled=true -Dhazelcast.graceful.shutdown.max.wait=600   "
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+          runAsGroup: 65534
+          privileged: false
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+      serviceAccountName: my-release-hazelcast
+      volumes:
+      - name: hazelcast-storage
+        configMap:
+          name: my-release-hazelcast-configuration
+
+NOTES:
+** Hazelcast cluster is being deployed! **
+
+-------------------------------------------------------------------------------
+
+To access Hazelcast within the Kubernetes cluster:
+
+- Use Hazelcast Client with Kubernetes Discovery Strategy. Read more at: https://github.com/hazelcast/hazelcast-kubernetes.
+
+-------------------------------------------------------------------------------
+
+To access Hazelcast from outside the Kubernetes cluster:
+
+- Use Hazelcast Client with Smart Routing disabled:
+  *) Forward port from POD:
+     $ export POD=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=hazelcast,role=hazelcast" -o jsonpath="{.items[0].metadata.name}")
+     $ kubectl port-forward --namespace default $POD 5701:5701
+  *) In Hazelcast Client configure:
+     clientConfig.getNetworkConfig().setSmartRouting(false);
+     clientConfig.getNetworkConfig().addAddress("127.0.0.1:5701");
+
+-------------------------------------------------------------------------------
+
+To access Hazelcast Management Center:
+  *) Check Management Center external IP:
+     $ export MANCENTER_IP=$(kubectl get svc --namespace default my-release-hazelcast-mancenter -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+  *) Open Browser at: http://$MANCENTER_IP:8080
