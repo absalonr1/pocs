@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: hazelcast-client
+  name: hazelcast-client-pod
+spec:
+  containers:
+  - image: hazelcast-client-1
+    name: hazelcast-client-container
+    imagePullPolicy: Never
+    volumeMounts:
+    - name: hazelcast-client-config-volume
+      mountPath: /data/hazelcast-conf
+      readOnly: true
+  volumes:
+  - name: hazelcast-client-config-volume
+    configMap:
+      name: hazelcast-client-configuration
+  restartPolicy: Never
