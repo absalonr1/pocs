@@ -6,7 +6,7 @@ metadata:
   name: hazelcast-client-pod
 spec:
   containers:
-  - image: hazelcast-client-1
+  - image: hazelcast-client-3
     name: hazelcast-client-container
     imagePullPolicy: Never
     volumeMounts:

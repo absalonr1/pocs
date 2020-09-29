@@ -85,7 +85,7 @@ k apply -f svc-nodeport-test.yaml
 # ~/git-root/pocs/hazelcast/java.client
 rm -rf ./target && \
 mvn package && \
-export img_name="hazelcast-client-1" && \
+export img_name="hazelcast-client-3" && \
 docker build -t $img_name .
 
 kubectl apply -f configmap.yaml

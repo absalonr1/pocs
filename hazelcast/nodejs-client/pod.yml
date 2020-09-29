@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nodejs-hazelcast-client
+  name: nodejs-hazelcast-client-pod
+spec:
+  containers:
+  - image: nodejs-hazelcast-client-1
+    name: nodejs-hazelcast-client-container
+    imagePullPolicy: Never
+    #restartPolicy: Never
+    ports:
+      - containerPort: 8080
+    env:
+    - name: HZ_SVC
+      value: my-release-hazelcast.default.svc.cluster.local
+    - name: PORT
+      value: "8080"
+    - name: HOST
+      value: "0.0.0.0"
