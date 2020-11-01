@@ -1,15 +1,14 @@
 import com.itextpdf.kernel.pdf.*;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.io.image.*;
 
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-
-        PdfDocument pdf = new PdfDocument(new PdfWriter("/home/absalon/oci_rch_ass.pdf"));
+        String name = "Administering-Exadata-Cloud@Customer-Gen-2";
+        PdfDocument pdf = new PdfDocument(new PdfWriter("/home/absalon/"+name+".pdf"));
         Document document = new Document(pdf);
         //String line = "Hello! Welcome to iTextPdf";
         //document.add(new Paragraph(line));
