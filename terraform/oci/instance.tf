@@ -4,7 +4,7 @@
 resource "oci_core_instance" "rdg-instance" {
   count               = 1
   availability_domain = data.oci_identity_availability_domain.ad.name
-  compartment_id      = var.provider_flag == "mcr" ? var.mcr_compartment_ocid : personal.mcr_compartment_ocid
+  compartment_id      = var.compartment_ocid
   display_name        = "RDG-HOST" #"TestInstance${count.index}"
   shape               = var.instance_shape
 
@@ -56,7 +56,7 @@ resource "oci_core_instance" "rdg-instance" {
 resource "oci_core_instance" "bastion-instance" {
   count               = 1
   availability_domain = data.oci_identity_availability_domain.ad.name
-  compartment_id      = "${var.provider_flag}_compartment_ocid"
+    compartment_id = var.compartment_ocid
   display_name        = "BASTION-HOST" #"TestInstance${count.index}"
   shape               = var.instance_shape
 
