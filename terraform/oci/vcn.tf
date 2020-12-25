@@ -5,7 +5,7 @@
 resource "oci_core_vcn" "test_vcn" {
   display_name   = "vcn-test-rdg"
   cidr_block     = "10.1.0.0/16"
-  compartment_id = var.compartment_ocid
+  compartment_id = var.provider_flag == "mcr" ? var.mcr_compartment_ocid : personal.mcr_compartment_ocid 
 }
 
 ###########################################
@@ -18,7 +18,7 @@ resource "oci_core_subnet" "private-subnet-rdg" {
   display_name        = "private-subnet-rdg"
   #dns_label           = "priv-sub-rdg"
   security_list_ids   = [oci_core_vcn.test_vcn.default_security_list_id]
-  compartment_id      = var.compartment_ocid
+  compartment_id      = var.provider_flag == "mcr" ? var.mcr_compartment_ocid : personal.mcr_compartment_ocid
   vcn_id              = oci_core_vcn.test_vcn.id
   route_table_id      = oci_core_vcn.test_vcn.default_route_table_id
   dhcp_options_id     = oci_core_vcn.test_vcn.default_dhcp_options_id
@@ -34,7 +34,7 @@ resource "oci_core_subnet" "public-subnet-rdg" {
   display_name        = "public-subnet-rdg"
   #dns_label           = "priv-sub-rdg"
   security_list_ids   = [oci_core_vcn.test_vcn.default_security_list_id]
-  compartment_id      = var.compartment_ocid
+  compartment_id      = var.provider_flag == "mcr" ? var.mcr_compartment_ocid : personal.mcr_compartment_ocid
   vcn_id              = oci_core_vcn.test_vcn.id
   route_table_id      = oci_core_route_table.public_subnet_route_table.id #oci_core_vcn.test_vcn.default_route_table_id
   dhcp_options_id     = oci_core_vcn.test_vcn.default_dhcp_options_id
@@ -47,7 +47,7 @@ resource "oci_core_subnet" "public-subnet-rdg" {
 
 resource "oci_core_internet_gateway" "test_internet_gateway" {
     #Required
-    compartment_id = var.compartment_ocid
+    compartment_id = var.provider_flag == "mcr" ? var.mcr_compartment_ocid : personal.mcr_compartment_ocid
     vcn_id = oci_core_vcn.test_vcn.id
 
     #Optional
@@ -65,7 +65,7 @@ resource "oci_core_internet_gateway" "test_internet_gateway" {
 
 resource "oci_core_route_table" "public_subnet_route_table" {
     #Required
-    compartment_id = var.compartment_ocid
+    compartment_id = var.provider_flag == "mcr" ? var.mcr_compartment_ocid : personal.mcr_compartment_ocid
     vcn_id = oci_core_vcn.test_vcn.id
 
     #Optional
