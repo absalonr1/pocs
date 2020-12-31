@@ -107,3 +107,24 @@ resource "oci_core_instance" "bastion-instance" {
   }
 
 }
+
+resource "null_resource" "remote-exec" {
+  depends_on = [oci_core_instance.bastion-instance]
+
+  provisioner "remote-exec" {
+    connection {
+      host     = oci_core_instance.bastion-instance[0].public_ip
+      user  = "opc"
+      private_key = file(var.ssh_private_key)
+    }
+
+    inline = [
+      "touch ~/IMadeAFile.Right.Here",
+      "chmod 400 ssh-key-2020-12-23.key",
+    ]
+  }
+
+  #triggers = {
+  #  always_run = oci_core_volume.test_block_volume.size_in_gbs
+  #}
+}
