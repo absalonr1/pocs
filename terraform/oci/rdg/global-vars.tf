@@ -44,3 +44,9 @@ variable "instance_shape" {
   default = "VM.Standard2.1"
 }
 
+
+
+
+variable "db_system_shape"{
+  default="VM.Standard2.1"
+}
