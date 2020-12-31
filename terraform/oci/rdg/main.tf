@@ -23,6 +23,16 @@ module "instance"{
     region=var.region
 }
 
-output "ads"{
-    value = module.vcn.show-ads
-} 
+#output "ads"{
+#    value = module.vcn.show-ads
+#} 
+
+output "bastion-public-ip" {
+  value=module.instance.bastion-public-ip
+}
+output "bastion-private-ip" {
+  value=module.instance.bastion-private-ip
+}
+output "rdg-private-ip" {
+  value=module.instance.rdg-private-ip
+}

@@ -1,7 +1,7 @@
 #######################################
 ##### Instancia privada 
 #######################################
-/* resource "oci_core_instance" "rdg-instance" {
+resource "oci_core_instance" "rdg-instance" {
   count               = 1
   availability_domain = data.oci_identity_availability_domain.ad.name
   compartment_id      = var.compartment_ocid
@@ -33,22 +33,18 @@
   metadata = {
     # "ssh_authorized_keys" - Provide one or more public SSH keys to be included in the ~/.ssh/authorized_keys
     ssh_authorized_keys = var.vm_ssh_public_key
-    user_data           = base64encode(var.user_data)
+    #user_data           = base64encode(var.user_data)
   }
   
   defined_tags = {
     "lad-mcr-s.pais"="Chile"
-  }
-
-  freeform_tags = {
-    "freeformkey${count.index}" = "freeformvalue${count.index}"
   }
   
   timeouts {
     create = "60m"
   }
 
-} */
+}
 
 #######################################
 ##### Instancia publica 
@@ -108,7 +104,7 @@ resource "oci_core_instance" "bastion-instance" {
 
 }
 
-resource "null_resource" "remote-exec" {
+resource "null_resource" "remote-exec-bastion-instance" {
   depends_on = [oci_core_instance.bastion-instance]
 
   provisioner "remote-exec" {
@@ -121,6 +117,35 @@ resource "null_resource" "remote-exec" {
     inline = [
       "touch ~/IMadeAFile.Right.Here",
       "chmod 400 ssh-key-2020-12-23.key",
+    ]
+  }
+
+  #triggers = {
+  #  always_run = oci_core_volume.test_block_volume.size_in_gbs
+  #}
+}
+
+resource "null_resource" "remote-exec-rdg-instance" {
+  depends_on = [oci_core_instance.bastion-instance,oci_core_instance.rdg-instance]
+
+  provisioner "remote-exec" {
+    connection {
+      type                = "ssh"
+      bastion_host        = oci_core_instance.bastion-instance[0].public_ip
+      bastion_host_key    = file(var.ssh_private_key)
+      bastion_port        = 22
+      bastion_user        = "opc"
+      bastion_private_key = file(var.ssh_private_key)
+      
+      host     = oci_core_instance.rdg-instance[0].private_ip
+      user  = "opc"
+      private_key = file(var.ssh_private_key)
+    }
+
+    inline = [
+      "touch ~/IMadeAFile.Right.Hereeeee",
+      "sudo systemctl stop firewalld",
+      "Oracle/Middleware/Oracle_Home/domain/bin/startJetty.sh",
     ]
   }
 
