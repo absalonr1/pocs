@@ -16,4 +16,8 @@ Oracle/Middleware/Oracle_Home/domain/bin/startJetty.sh
 EOF
 }
 
+variable "ssh_private_key" {
+  default = "/home/absalon/git-root/pocs/terraform/oci/rdg/vm-ssh-keys/ssh-key-2020-12-23.key"
+}
+
 

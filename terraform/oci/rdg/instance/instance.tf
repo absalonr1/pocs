@@ -1,7 +1,7 @@
 #######################################
 ##### Instancia privada 
 #######################################
-resource "oci_core_instance" "rdg-instance" {
+/* resource "oci_core_instance" "rdg-instance" {
   count               = 1
   availability_domain = data.oci_identity_availability_domain.ad.name
   compartment_id      = var.compartment_ocid
@@ -48,7 +48,7 @@ resource "oci_core_instance" "rdg-instance" {
     create = "60m"
   }
 
-}
+} */
 
 #######################################
 ##### Instancia publica 
@@ -93,14 +93,15 @@ resource "oci_core_instance" "bastion-instance" {
   }
 
   provisioner "file" {
-    source      = "../vm-ssh-keys/ssh-key-2020-12-23.key"
+    source      = "/home/absalon/git-root/pocs/terraform/oci/rdg/vm-ssh-keys/ssh-key-2020-12-23.key"
     destination = "~/ssh-key-2020-12-23.key"
+    connection {
+      host     = oci_core_instance.bastion-instance[0].public_ip
+      user  = "opc"
+      private_key = file(var.ssh_private_key)
+    }
   }
 
-  freeform_tags = {
-    "freeformkey${count.index}" = "freeformvalue${count.index}"
-  }
-  
   timeouts {
     create = "60m"
   }

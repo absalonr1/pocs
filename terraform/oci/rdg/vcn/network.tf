@@ -2,10 +2,13 @@
 ###### VCN 
 ###########################################
 
-resource "oci_core_vcn" "test_vcn" {
+resource "oci_core_vcn" "vcn-test-rdg" {
   display_name   = "vcn-test-rdg"
   cidr_block     = "10.1.0.0/16"
-  compartment_id = var.compartment_ocid 
+  compartment_id = var.compartment_ocid
+  defined_tags = {
+    "lad-mcr-s.pais"="Chile"
+  }
 }
 
 ###########################################
@@ -18,12 +21,15 @@ resource "oci_core_subnet" "private-subnet-rdg" {
   cidr_block          = "10.1.0.0/24"
   display_name        = "private-subnet-rdg"
   #dns_label           = "priv-sub-rdg"
-  security_list_ids   = [oci_core_vcn.test_vcn.default_security_list_id]
+  security_list_ids   = [oci_core_security_list.test-rdg-security-list.id]
   compartment_id      = var.compartment_ocid
-  vcn_id              = oci_core_vcn.test_vcn.id
-  route_table_id      = oci_core_vcn.test_vcn.default_route_table_id
-  dhcp_options_id     = oci_core_vcn.test_vcn.default_dhcp_options_id
+  vcn_id              = oci_core_vcn.vcn-test-rdg.id
+  route_table_id      = oci_core_route_table.priv_subnet_route_table_test_rdg.id
+  dhcp_options_id     = oci_core_vcn.vcn-test-rdg.default_dhcp_options_id
   prohibit_public_ip_on_vnic = true
+  defined_tags = {
+    "lad-mcr-s.pais"="Chile"
+  }
 }
 
 ###########################################
@@ -35,28 +41,34 @@ resource "oci_core_subnet" "public-subnet-rdg" {
   cidr_block          = "10.1.1.0/24"
   display_name        = "public-subnet-rdg"
   #dns_label           = "priv-sub-rdg"
-  security_list_ids   = [oci_core_security_list.test_security_list.id] # [oci_core_vcn.test_vcn.default_security_list_id]
+  security_list_ids   = [oci_core_security_list.test-rdg-security-list.id] # [oci_core_vcn.vcn-test-rdg.default_security_list_id]
   compartment_id      = var.compartment_ocid
-  vcn_id              = oci_core_vcn.test_vcn.id
-  route_table_id      = oci_core_route_table.public_subnet_route_table.id #oci_core_vcn.test_vcn.default_route_table_id
-  dhcp_options_id     = oci_core_vcn.test_vcn.default_dhcp_options_id
+  vcn_id              = oci_core_vcn.vcn-test-rdg.id
+  route_table_id      = oci_core_route_table.pub_subnet_route_table_test_rdg.id #oci_core_vcn.vcn-test-rdg.default_route_table_id
+  dhcp_options_id     = oci_core_vcn.vcn-test-rdg.default_dhcp_options_id
   prohibit_public_ip_on_vnic = false
+
+  defined_tags = {
+    "lad-mcr-s.pais"="Chile"
+  }
 }
 
 ###########################################
 ###### IGW
 ###########################################
 
-resource "oci_core_internet_gateway" "test_internet_gateway" {
+resource "oci_core_internet_gateway" "test_rdg_internet_gateway" {
     #Required
     compartment_id = var.compartment_ocid
-    vcn_id = oci_core_vcn.test_vcn.id
+    vcn_id = oci_core_vcn.vcn-test-rdg.id
 
     #Optional
     enabled = true
-    #defined_tags = {"Operations.CostCenter"= "42"}
     display_name = "internet-gw"
     #freeform_tags = {"Department"= "Finance"}
+    defined_tags = {
+    "lad-mcr-s.pais"="Chile"
+  }
 }
 
 
@@ -65,10 +77,10 @@ resource "oci_core_internet_gateway" "test_internet_gateway" {
 ###########################################
 
 
-resource "oci_core_route_table" "public_subnet_route_table" {
+resource "oci_core_route_table" "pub_subnet_route_table_test_rdg" {
     #Required
     compartment_id = var.compartment_ocid
-    vcn_id = oci_core_vcn.test_vcn.id
+    vcn_id = oci_core_vcn.vcn-test-rdg.id
 
     #Optional
     #defined_tags = {"Operations.CostCenter"= "42"}
@@ -77,12 +89,29 @@ resource "oci_core_route_table" "public_subnet_route_table" {
     route_rules {
         #Required
         # "Target" en la consola OCI
-        network_entity_id = oci_core_internet_gateway.test_internet_gateway.id
+        network_entity_id = oci_core_internet_gateway.test_rdg_internet_gateway.id
 
         #Optional
         description = "internet-gw"
         destination = "0.0.0.0/0"
         destination_type = "CIDR_BLOCK"
+    }
+    defined_tags = {
+      "lad-mcr-s.pais"="Chile"
+    }
+}
+
+###########################################
+###### ROUTE TABLE - private  subnet
+###########################################
+
+
+resource "oci_core_route_table" "priv_subnet_route_table_test_rdg" {
+    #Required
+    compartment_id = var.compartment_ocid
+    vcn_id = oci_core_vcn.vcn-test-rdg.id
+    defined_tags = {
+      "lad-mcr-s.pais"="Chile"
     }
 }
 
@@ -91,11 +120,10 @@ resource "oci_core_route_table" "public_subnet_route_table" {
 ###########################################
 
 
-
-resource "oci_core_security_list" "test_security_list" {
+resource "oci_core_security_list" "test-rdg-security-list" {
     #Required
     compartment_id = var.compartment_ocid
-    vcn_id = oci_core_vcn.test_vcn.id
+    vcn_id = oci_core_vcn.vcn-test-rdg.id
     display_name="sec-list-windows-bastion"
 
     defined_tags = {

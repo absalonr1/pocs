@@ -1,6 +1,6 @@
 #https://www.terraform.io/docs/configuration/outputs.html
 output "vcn_id" {
-  value=oci_core_vcn.test_vcn.id
+  value=oci_core_vcn.vcn-test-rdg.id
 }
 
 output "public_subnet_id" {

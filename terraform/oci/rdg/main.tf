@@ -18,8 +18,8 @@ module "instance"{
     instance_image_ocid=var.instance_image_ocid
 
     vm_ssh_public_key=var.vm_ssh_public_key
-    public_subnet_id=module.vcn.public_subnet_id # var.subnet_id 
-    private_subnet_id=module.vcn.private_subnet_id #var.subnet_id #
+    public_subnet_id=module.vcn.public_subnet_id 
+    private_subnet_id=module.vcn.private_subnet_id 
     region=var.region
 }
 

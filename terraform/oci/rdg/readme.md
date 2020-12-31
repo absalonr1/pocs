@@ -2,6 +2,11 @@
 https://objectstorage.us-ashburn-1.oraclecloud.com/p/aHllXuwJbt9hTsVztN57upcj3V6tKV5uZgOG96maX9K677oD2v5lAJ2YiPMI-ymM/n/idlhjo6dp3bd/b/bucket-oac-data-gw/o/data-gw-linux-5.8
 
 
+ssh RDG-HOST Oracle/Middleware/Silent_Home/domain/bin/startJetty.sh
+ssh RDG-HOST Oracle/Middleware/Silent_Home/domain/bin/status.sh
+admin
+Admin123
+
 sudo iptables -nL
 sudo iptables -I INPUT 5 -p tcp --dport 8080 -j ACCEPT
 sudo iptables-save
