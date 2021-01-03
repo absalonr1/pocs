@@ -5,6 +5,7 @@
 resource "oci_core_vcn" "vcn-test-rdg" {
   display_name   = "vcn-test-rdg"
   cidr_block     = "10.1.0.0/16"
+  dns_label = "rdgtest"
   compartment_id = var.compartment_ocid
   defined_tags = {
     "lad-mcr-s.pais"="Chile"

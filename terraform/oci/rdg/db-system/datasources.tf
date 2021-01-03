@@ -31,7 +31,7 @@ data "oci_database_db_versions" "test_db_versions_by_db_system_id" {
 
 data "oci_identity_availability_domain" "ad" {
   compartment_id = var.tenancy_ocid
-  ad_number      = 1
+  ad_number      = var.ad_number
 }
 
 data "oci_database_db_system_shapes" "test_db_system_shapes" {

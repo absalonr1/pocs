@@ -1,0 +1,429 @@
+[0m# module.vcn.data.oci_identity_availability_domain.ad:
+data "oci_identity_availability_domain" "ad" {
+    [1m[0mad_number[0m[0m      = 1
+    [1m[0mcompartment_id[0m[0m = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+    [1m[0mid[0m[0m             = "ocid1.availabilitydomain.oc1..aaaaaaaawx54fdq62jqhpb6ac4hhb7p5zapnm5yvhpyjqv4sdhmr6bfzmeua"
+    [1m[0mname[0m[0m           = "EgzC:SA-SANTIAGO-1-AD-1"
+}
+
+# module.vcn.data.oci_identity_availability_domains.ads:
+data "oci_identity_availability_domains" "ads" {
+    [1m[0mavailability_domains[0m[0m = [
+        {
+            compartment_id = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+            id             = "ocid1.availabilitydomain.oc1..aaaaaaaawx54fdq62jqhpb6ac4hhb7p5zapnm5yvhpyjqv4sdhmr6bfzmeua"
+            name           = "EgzC:SA-SANTIAGO-1-AD-1"
+        },
+    ]
+    [1m[0mcompartment_id[0m[0m       = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+    [1m[0mid[0m[0m                   = "IdentityAvailabilityDomainsDataSource-874021604"
+}
+
+# module.vcn.oci_core_internet_gateway.test_rdg_internet_gateway:
+resource "oci_core_internet_gateway" "test_rdg_internet_gateway" {
+    [1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefined_tags[0m[0m   = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:23.130Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdisplay_name[0m[0m   = "internet-gw"
+    [1m[0menabled[0m[0m        = true
+    [1m[0mfreeform_tags[0m[0m  = {}
+    [1m[0mid[0m[0m             = "ocid1.internetgateway.oc1.sa-santiago-1.aaaaaaaacqswx5ezlseucidywbih3fnnhcb4jh6zvssmoc4yyj4w4rpzqnzq"
+    [1m[0mstate[0m[0m          = "AVAILABLE"
+    [1m[0mtime_created[0m[0m   = "2021-01-03 18:14:23.213 +0000 UTC"
+    [1m[0mvcn_id[0m[0m         = "ocid1.vcn.oc1.sa-santiago-1.amaaaaaavoaa5ziambci4i6vkr4hcdaenne275nsycmcesfvepwzgdfmcpya"
+}
+
+# module.vcn.oci_core_route_table.priv_subnet_route_table_test_rdg:
+resource "oci_core_route_table" "priv_subnet_route_table_test_rdg" {
+    [1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefined_tags[0m[0m   = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:23.178Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdisplay_name[0m[0m   = "routetable20210103181423"
+    [1m[0mfreeform_tags[0m[0m  = {}
+    [1m[0mid[0m[0m             = "ocid1.routetable.oc1.sa-santiago-1.aaaaaaaanbfcuz7w6wnu45nfy5oymcism4nnigapq4solnj2b5nudcccyjga"
+    [1m[0mstate[0m[0m          = "AVAILABLE"
+    [1m[0mtime_created[0m[0m   = "2021-01-03 18:14:23.195 +0000 UTC"
+    [1m[0mvcn_id[0m[0m         = "ocid1.vcn.oc1.sa-santiago-1.amaaaaaavoaa5ziambci4i6vkr4hcdaenne275nsycmcesfvepwzgdfmcpya"
+}
+
+# module.vcn.oci_core_route_table.pub_subnet_route_table_test_rdg:
+resource "oci_core_route_table" "pub_subnet_route_table_test_rdg" {
+    [1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefined_tags[0m[0m   = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:23.558Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdisplay_name[0m[0m   = "routetable20210103181423"
+    [1m[0mfreeform_tags[0m[0m  = {}
+    [1m[0mid[0m[0m             = "ocid1.routetable.oc1.sa-santiago-1.aaaaaaaad73tqfkb5amlos5c6domqdgyzyvzqcrobupay7rtwu5mpz7h5zgq"
+    [1m[0mstate[0m[0m          = "AVAILABLE"
+    [1m[0mtime_created[0m[0m   = "2021-01-03 18:14:23.593 +0000 UTC"
+    [1m[0mvcn_id[0m[0m         = "ocid1.vcn.oc1.sa-santiago-1.amaaaaaavoaa5ziambci4i6vkr4hcdaenne275nsycmcesfvepwzgdfmcpya"
+
+    route_rules {
+        [1m[0mdescription[0m[0m       = "internet-gw"
+        [1m[0mdestination[0m[0m       = "0.0.0.0/0"
+        [1m[0mdestination_type[0m[0m  = "CIDR_BLOCK"
+        [1m[0mnetwork_entity_id[0m[0m = "ocid1.internetgateway.oc1.sa-santiago-1.aaaaaaaacqswx5ezlseucidywbih3fnnhcb4jh6zvssmoc4yyj4w4rpzqnzq"
+    }
+}
+
+# module.vcn.oci_core_security_list.test-rdg-security-list:
+resource "oci_core_security_list" "test-rdg-security-list" {
+    [1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefined_tags[0m[0m   = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:23.224Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdisplay_name[0m[0m   = "sec-list-windows-bastion"
+    [1m[0mfreeform_tags[0m[0m  = {}
+    [1m[0mid[0m[0m             = "ocid1.securitylist.oc1.sa-santiago-1.aaaaaaaa5u6o37pqheyfwat2yqsbv2tfi4ghmrn7rt3b2qbaozh57pjprnma"
+    [1m[0mstate[0m[0m          = "AVAILABLE"
+    [1m[0mtime_created[0m[0m   = "2021-01-03 18:14:23.238 +0000 UTC"
+    [1m[0mvcn_id[0m[0m         = "ocid1.vcn.oc1.sa-santiago-1.amaaaaaavoaa5ziambci4i6vkr4hcdaenne275nsycmcesfvepwzgdfmcpya"
+
+    egress_security_rules {
+        [1m[0mdescription[0m[0m      = "Agress to All"
+        [1m[0mdestination[0m[0m      = "0.0.0.0/0"
+        [1m[0mdestination_type[0m[0m = "CIDR_BLOCK"
+        [1m[0mprotocol[0m[0m         = "all"
+        [1m[0mstateless[0m[0m        = false
+    }
+
+    ingress_security_rules {
+        [1m[0mdescription[0m[0m = "Ingress solo TCP"
+        [1m[0mprotocol[0m[0m    = "all"
+        [1m[0msource[0m[0m      = "0.0.0.0/0"
+        [1m[0msource_type[0m[0m = "CIDR_BLOCK"
+        [1m[0mstateless[0m[0m   = false
+    }
+}
+
+# module.vcn.oci_core_subnet.private-subnet-rdg:
+resource "oci_core_subnet" "private-subnet-rdg" {
+    [1m[0mcidr_block[0m[0m                 = "10.1.0.0/24"
+    [1m[0mcompartment_id[0m[0m             = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefined_tags[0m[0m               = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:23.636Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdhcp_options_id[0m[0m            = "ocid1.dhcpoptions.oc1.sa-santiago-1.aaaaaaaa3pbiz37fdcy4wk66zahcrgwh3xdypomivl3ycx36sbjrwom2kc2a"
+    [1m[0mdisplay_name[0m[0m               = "private-subnet-rdg"
+    [1m[0mfreeform_tags[0m[0m              = {}
+    [1m[0mid[0m[0m                         = "ocid1.subnet.oc1.sa-santiago-1.aaaaaaaav6aj3keebxnws5kggyfucsukzhtjkbily6ixqvyolxzfrjsqfceq"
+    [1m[0mprohibit_public_ip_on_vnic[0m[0m = true
+    [1m[0mroute_table_id[0m[0m             = "ocid1.routetable.oc1.sa-santiago-1.aaaaaaaanbfcuz7w6wnu45nfy5oymcism4nnigapq4solnj2b5nudcccyjga"
+    [1m[0msecurity_list_ids[0m[0m          = [
+        "ocid1.securitylist.oc1.sa-santiago-1.aaaaaaaa5u6o37pqheyfwat2yqsbv2tfi4ghmrn7rt3b2qbaozh57pjprnma",
+    ]
+    [1m[0mstate[0m[0m                      = "AVAILABLE"
+    [1m[0mtime_created[0m[0m               = "2021-01-03 18:14:25.297 +0000 UTC"
+    [1m[0mvcn_id[0m[0m                     = "ocid1.vcn.oc1.sa-santiago-1.amaaaaaavoaa5ziambci4i6vkr4hcdaenne275nsycmcesfvepwzgdfmcpya"
+    [1m[0mvirtual_router_ip[0m[0m          = "10.1.0.1"
+    [1m[0mvirtual_router_mac[0m[0m         = "00:00:17:12:E3:17"
+}
+
+# module.vcn.oci_core_subnet.public-subnet-rdg:
+resource "oci_core_subnet" "public-subnet-rdg" {
+    [1m[0mcidr_block[0m[0m                 = "10.1.1.0/24"
+    [1m[0mcompartment_id[0m[0m             = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefined_tags[0m[0m               = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:24.119Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdhcp_options_id[0m[0m            = "ocid1.dhcpoptions.oc1.sa-santiago-1.aaaaaaaa3pbiz37fdcy4wk66zahcrgwh3xdypomivl3ycx36sbjrwom2kc2a"
+    [1m[0mdisplay_name[0m[0m               = "public-subnet-rdg"
+    [1m[0mfreeform_tags[0m[0m              = {}
+    [1m[0mid[0m[0m                         = "ocid1.subnet.oc1.sa-santiago-1.aaaaaaaaonlezlnnoje6fjlkrmapzxx4tn2dh2t55nnx7tyutusch3dyaqpq"
+    [1m[0mprohibit_public_ip_on_vnic[0m[0m = false
+    [1m[0mroute_table_id[0m[0m             = "ocid1.routetable.oc1.sa-santiago-1.aaaaaaaad73tqfkb5amlos5c6domqdgyzyvzqcrobupay7rtwu5mpz7h5zgq"
+    [1m[0msecurity_list_ids[0m[0m          = [
+        "ocid1.securitylist.oc1.sa-santiago-1.aaaaaaaa5u6o37pqheyfwat2yqsbv2tfi4ghmrn7rt3b2qbaozh57pjprnma",
+    ]
+    [1m[0mstate[0m[0m                      = "AVAILABLE"
+    [1m[0mtime_created[0m[0m               = "2021-01-03 18:14:24.493 +0000 UTC"
+    [1m[0mvcn_id[0m[0m                     = "ocid1.vcn.oc1.sa-santiago-1.amaaaaaavoaa5ziambci4i6vkr4hcdaenne275nsycmcesfvepwzgdfmcpya"
+    [1m[0mvirtual_router_ip[0m[0m          = "10.1.1.1"
+    [1m[0mvirtual_router_mac[0m[0m         = "00:00:17:12:E3:17"
+}
+
+# module.vcn.oci_core_vcn.vcn-test-rdg:
+resource "oci_core_vcn" "vcn-test-rdg" {
+    [1m[0mcidr_block[0m[0m               = "10.1.0.0/16"
+    [1m[0mcidr_blocks[0m[0m              = [
+        "10.1.0.0/16",
+    ]
+    [1m[0mcompartment_id[0m[0m           = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefault_dhcp_options_id[0m[0m  = "ocid1.dhcpoptions.oc1.sa-santiago-1.aaaaaaaa3pbiz37fdcy4wk66zahcrgwh3xdypomivl3ycx36sbjrwom2kc2a"
+    [1m[0mdefault_route_table_id[0m[0m   = "ocid1.routetable.oc1.sa-santiago-1.aaaaaaaae6i7sl76rue5vqgtgnj55la2ofmu3on4yn6jrdkxfoasabtaloaq"
+    [1m[0mdefault_security_list_id[0m[0m = "ocid1.securitylist.oc1.sa-santiago-1.aaaaaaaa5pguzyncz5wgyzllv4zimxuh26x24yng5a6327zh7avtvlnbhoaq"
+    [1m[0mdefined_tags[0m[0m             = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:22.745Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdisplay_name[0m[0m             = "vcn-test-rdg"
+    [1m[0mfreeform_tags[0m[0m            = {}
+    [1m[0mid[0m[0m                       = "ocid1.vcn.oc1.sa-santiago-1.amaaaaaavoaa5ziambci4i6vkr4hcdaenne275nsycmcesfvepwzgdfmcpya"
+    [1m[0mstate[0m[0m                    = "AVAILABLE"
+    [1m[0mtime_created[0m[0m             = "2021-01-03 18:14:22.752 +0000 UTC"
+}
+
+
+
+# module.db.data.oci_database_db_system_shapes.test_db_system_shapes:
+data "oci_database_db_system_shapes" "test_db_system_shapes" {
+    [1m[0mavailability_domain[0m[0m = "EgzC:SA-SANTIAGO-1-AD-1"
+    [1m[0mcompartment_id[0m[0m      = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdb_system_shapes[0m[0m    = [
+        {
+            available_core_count                = 1
+            available_core_count_per_node       = 0
+            available_data_storage_in_tbs       = 0
+            available_db_node_storage_in_gbs    = 0
+            available_memory_in_gbs             = 15
+            core_count_increment                = 0
+            maximum_node_count                  = 1
+            min_core_count_per_node             = 0
+            min_data_storage_in_tbs             = 0
+            min_db_node_storage_per_node_in_gbs = 0
+            min_memory_per_node_in_gbs          = 0
+            minimum_core_count                  = 1
+            minimum_node_count                  = 1
+            name                                = "VM.Standard2.1"
+            shape                               = "VM.Standard2.1"
+            shape_family                        = "VIRTUALMACHINE"
+        },
+    ]
+    [1m[0mid[0m[0m                  = "DatabaseDbSystemShapesDataSource-1096640177"
+
+    filter {
+        [1m[0mname[0m[0m   = "shape"
+        [1m[0mregex[0m[0m  = false
+        [1m[0mvalues[0m[0m = [
+            "VM.Standard2.1",
+        ]
+    }
+}
+
+# module.db.data.oci_identity_availability_domain.ad:
+data "oci_identity_availability_domain" "ad" {
+    [1m[0mad_number[0m[0m      = 1
+    [1m[0mcompartment_id[0m[0m = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+    [1m[0mid[0m[0m             = "ocid1.availabilitydomain.oc1..aaaaaaaawx54fdq62jqhpb6ac4hhb7p5zapnm5yvhpyjqv4sdhmr6bfzmeua"
+    [1m[0mname[0m[0m           = "EgzC:SA-SANTIAGO-1-AD-1"
+}
+
+
+# module.instance.data.oci_identity_availability_domain.ad:
+data "oci_identity_availability_domain" "ad" {
+    [1m[0mad_number[0m[0m      = 1
+    [1m[0mcompartment_id[0m[0m = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+    [1m[0mid[0m[0m             = "ocid1.availabilitydomain.oc1..aaaaaaaawx54fdq62jqhpb6ac4hhb7p5zapnm5yvhpyjqv4sdhmr6bfzmeua"
+    [1m[0mname[0m[0m           = "EgzC:SA-SANTIAGO-1-AD-1"
+}
+
+# module.instance.null_resource.remote-exec-bastion-instance:
+resource "null_resource" "remote-exec-bastion-instance" {
+    [1m[0mid[0m[0m = "8950466422607030713"
+}
+
+# module.instance.null_resource.remote-exec-rdg-instance:
+resource "null_resource" "remote-exec-rdg-instance" {
+    [1m[0mid[0m[0m = "7458430144692012529"
+}
+
+# module.instance.oci_core_instance.bastion-instance[0]:
+resource "oci_core_instance" "bastion-instance" {
+    [1m[0mavailability_domain[0m[0m = "EgzC:SA-SANTIAGO-1-AD-1"
+    [1m[0mboot_volume_id[0m[0m      = "ocid1.bootvolume.oc1.sa-santiago-1.abzwgljr6qpliyaoweqg7xqyrkzktisjgm5tg3lathb5afvijdivjtborfda"
+    [1m[0mcompartment_id[0m[0m      = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefined_tags[0m[0m        = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:25.936Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdisplay_name[0m[0m        = "BASTION-HOST"
+    [1m[0mfault_domain[0m[0m        = "FAULT-DOMAIN-1"
+    [1m[0mfreeform_tags[0m[0m       = {}
+    [1m[0mid[0m[0m                  = "ocid1.instance.oc1.sa-santiago-1.anzwgljrvoaa5ziclsd6mtlklky6syfyegppv4whcq7mezqvzyw5vvdvfbna"
+    [1m[0mimage[0m[0m               = "ocid1.image.oc1.sa-santiago-1.aaaaaaaavp74v67m52kohyusliy4fnov5j6yfugbxfa3dfmpicvd4ptqy6oq"
+    [1m[0mlaunch_mode[0m[0m         = "NATIVE"
+    [1m[0mmetadata[0m[0m            = {
+        "ssh_authorized_keys" = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCSnsp45Cq5tOofh354wAYoou7MHGrzgFYLyM981UTJW2vtgOO9DNyn5vbkKFdtVNrvCUCjbhSqhhKdJSqX23+fl4/tOVZof0sKWLv9Evj0M4TjJ9isszhtbFfjuh37vAJ1IHnd2E0QsUpL3P2gIHTuoU9hzaCq7mFBRC9aP0Pz4EwLyDBwtErMsiWapARR0nUGLdZMQwANwdvOo9/7hlyiriYwAw3TChWyuYnyDSvO89EugHsail7b+v/Pi7ani+lpp0jMIFkFAtur7kiPFz6TzK6gw75OMZLMf3kilTWMZaKLzIUy/BL2QOtRe1HAdzQA4jqQm0GYkvKRkDzMm2zf ssh-key-2020-12-23"
+    }
+    [1m[0mprivate_ip[0m[0m          = "10.1.1.2"
+    [1m[0mpublic_ip[0m[0m           = "129.151.105.245"
+    [1m[0mregion[0m[0m              = "sa-santiago-1"
+    [1m[0mshape[0m[0m               = "VM.Standard2.1"
+    [1m[0mstate[0m[0m               = "RUNNING"
+    [1m[0msubnet_id[0m[0m           = "ocid1.subnet.oc1.sa-santiago-1.aaaaaaaaonlezlnnoje6fjlkrmapzxx4tn2dh2t55nnx7tyutusch3dyaqpq"
+    [1m[0msystem_tags[0m[0m         = {}
+    [1m[0mtime_created[0m[0m        = "2021-01-03 18:14:26.478 +0000 UTC"
+
+    agent_config {
+        [1m[0mis_management_disabled[0m[0m = false
+        [1m[0mis_monitoring_disabled[0m[0m = false
+    }
+
+    availability_config {
+        [1m[0mrecovery_action[0m[0m = "RESTORE_INSTANCE"
+    }
+
+    create_vnic_details {
+        [1m[0massign_public_ip[0m[0m       = "true"
+        [1m[0mdefined_tags[0m[0m           = {
+            "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+            "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:25.936Z"
+            "lad-mcr-s.pais"        = "Chile"
+        }
+        [1m[0mdisplay_name[0m[0m           = "Primaryvnic"
+        [1m[0mfreeform_tags[0m[0m          = {}
+        [1m[0mprivate_ip[0m[0m             = "10.1.1.2"
+        [1m[0mskip_source_dest_check[0m[0m = false
+        [1m[0msubnet_id[0m[0m              = "ocid1.subnet.oc1.sa-santiago-1.aaaaaaaaonlezlnnoje6fjlkrmapzxx4tn2dh2t55nnx7tyutusch3dyaqpq"
+    }
+
+    instance_options {
+        [1m[0mare_legacy_imds_endpoints_disabled[0m[0m = false
+    }
+
+    launch_options {
+        [1m[0mboot_volume_type[0m[0m                    = "PARAVIRTUALIZED"
+        [1m[0mfirmware[0m[0m                            = "UEFI_64"
+        [1m[0mis_consistent_volume_naming_enabled[0m[0m = true
+        [1m[0mis_pv_encryption_in_transit_enabled[0m[0m = false
+        [1m[0mnetwork_type[0m[0m                        = "PARAVIRTUALIZED"
+        [1m[0mremote_data_volume_type[0m[0m             = "PARAVIRTUALIZED"
+    }
+
+    shape_config {
+        [1m[0mgpus[0m[0m                          = 0
+        [1m[0mlocal_disks[0m[0m                   = 0
+        [1m[0mlocal_disks_total_size_in_gbs[0m[0m = 0
+        [1m[0mmax_vnic_attachments[0m[0m          = 2
+        [1m[0mmemory_in_gbs[0m[0m                 = 15
+        [1m[0mnetworking_bandwidth_in_gbps[0m[0m  = 1
+        [1m[0mocpus[0m[0m                         = 1
+        [1m[0mprocessor_description[0m[0m         = "2.0 GHz Intel® Xeon® Platinum 8167M (Skylake)"
+    }
+
+    source_details {
+        [1m[0mboot_volume_size_in_gbs[0m[0m = "47"
+        [1m[0msource_id[0m[0m               = "ocid1.image.oc1.sa-santiago-1.aaaaaaaavp74v67m52kohyusliy4fnov5j6yfugbxfa3dfmpicvd4ptqy6oq"
+        [1m[0msource_type[0m[0m             = "image"
+    }
+
+    timeouts {
+        [1m[0mcreate[0m[0m = "60m"
+    }
+}
+
+# module.instance.oci_core_instance.rdg-instance[0]:
+resource "oci_core_instance" "rdg-instance" {
+    [1m[0mavailability_domain[0m[0m = "EgzC:SA-SANTIAGO-1-AD-1"
+    [1m[0mboot_volume_id[0m[0m      = "ocid1.bootvolume.oc1.sa-santiago-1.abzwgljrfsexcgaol2murrdasht4owujvornqa26dvjo6yzesvb2t7cagmtq"
+    [1m[0mcompartment_id[0m[0m      = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+    [1m[0mdefined_tags[0m[0m        = {
+        "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+        "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:25.936Z"
+        "lad-mcr-s.pais"        = "Chile"
+    }
+    [1m[0mdisplay_name[0m[0m        = "RDG-HOST"
+    [1m[0mfault_domain[0m[0m        = "FAULT-DOMAIN-1"
+    [1m[0mfreeform_tags[0m[0m       = {}
+    [1m[0mid[0m[0m                  = "ocid1.instance.oc1.sa-santiago-1.anzwgljrvoaa5zicsxextlzk7e466ona4unpkhrvi4fh3gsxrrrv2cchshba"
+    [1m[0mimage[0m[0m               = "ocid1.image.oc1.sa-santiago-1.aaaaaaaap2yu7ap4wcticiqdiibnc3kxkpvvszsff6yr5ofvfn4xvb3plabq"
+    [1m[0mlaunch_mode[0m[0m         = "NATIVE"
+    [1m[0mmetadata[0m[0m            = {
+        "ssh_authorized_keys" = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCSnsp45Cq5tOofh354wAYoou7MHGrzgFYLyM981UTJW2vtgOO9DNyn5vbkKFdtVNrvCUCjbhSqhhKdJSqX23+fl4/tOVZof0sKWLv9Evj0M4TjJ9isszhtbFfjuh37vAJ1IHnd2E0QsUpL3P2gIHTuoU9hzaCq7mFBRC9aP0Pz4EwLyDBwtErMsiWapARR0nUGLdZMQwANwdvOo9/7hlyiriYwAw3TChWyuYnyDSvO89EugHsail7b+v/Pi7ani+lpp0jMIFkFAtur7kiPFz6TzK6gw75OMZLMf3kilTWMZaKLzIUy/BL2QOtRe1HAdzQA4jqQm0GYkvKRkDzMm2zf ssh-key-2020-12-23"
+    }
+    [1m[0mprivate_ip[0m[0m          = "10.1.0.2"
+    [1m[0mregion[0m[0m              = "sa-santiago-1"
+    [1m[0mshape[0m[0m               = "VM.Standard2.1"
+    [1m[0mstate[0m[0m               = "RUNNING"
+    [1m[0msubnet_id[0m[0m           = "ocid1.subnet.oc1.sa-santiago-1.aaaaaaaav6aj3keebxnws5kggyfucsukzhtjkbily6ixqvyolxzfrjsqfceq"
+    [1m[0msystem_tags[0m[0m         = {}
+    [1m[0mtime_created[0m[0m        = "2021-01-03 18:14:28.268 +0000 UTC"
+
+    agent_config {
+        [1m[0mis_management_disabled[0m[0m = false
+        [1m[0mis_monitoring_disabled[0m[0m = false
+    }
+
+    availability_config {
+        [1m[0mrecovery_action[0m[0m = "RESTORE_INSTANCE"
+    }
+
+    create_vnic_details {
+        [1m[0massign_public_ip[0m[0m       = "false"
+        [1m[0mdefined_tags[0m[0m           = {
+            "Oracle-Tags.CreatedBy" = "oracleidentitycloudservice/absalon.opazo@oracle.com"
+            "Oracle-Tags.CreatedOn" = "2021-01-03T18:14:25.936Z"
+            "lad-mcr-s.pais"        = "Chile"
+        }
+        [1m[0mdisplay_name[0m[0m           = "Primaryvnic"
+        [1m[0mfreeform_tags[0m[0m          = {}
+        [1m[0mprivate_ip[0m[0m             = "10.1.0.2"
+        [1m[0mskip_source_dest_check[0m[0m = false
+        [1m[0msubnet_id[0m[0m              = "ocid1.subnet.oc1.sa-santiago-1.aaaaaaaav6aj3keebxnws5kggyfucsukzhtjkbily6ixqvyolxzfrjsqfceq"
+    }
+
+    instance_options {
+        [1m[0mare_legacy_imds_endpoints_disabled[0m[0m = false
+    }
+
+    launch_options {
+        [1m[0mboot_volume_type[0m[0m                    = "PARAVIRTUALIZED"
+        [1m[0mfirmware[0m[0m                            = "UEFI_64"
+        [1m[0mis_consistent_volume_naming_enabled[0m[0m = true
+        [1m[0mis_pv_encryption_in_transit_enabled[0m[0m = false
+        [1m[0mnetwork_type[0m[0m                        = "PARAVIRTUALIZED"
+        [1m[0mremote_data_volume_type[0m[0m             = "PARAVIRTUALIZED"
+    }
+
+    shape_config {
+        [1m[0mgpus[0m[0m                          = 0
+        [1m[0mlocal_disks[0m[0m                   = 0
+        [1m[0mlocal_disks_total_size_in_gbs[0m[0m = 0
+        [1m[0mmax_vnic_attachments[0m[0m          = 2
+        [1m[0mmemory_in_gbs[0m[0m                 = 15
+        [1m[0mnetworking_bandwidth_in_gbps[0m[0m  = 1
+        [1m[0mocpus[0m[0m                         = 1
+        [1m[0mprocessor_description[0m[0m         = "2.0 GHz Intel® Xeon® Platinum 8167M (Skylake)"
+    }
+
+    source_details {
+        [1m[0mboot_volume_size_in_gbs[0m[0m = "47"
+        [1m[0msource_id[0m[0m               = "ocid1.image.oc1.sa-santiago-1.aaaaaaaap2yu7ap4wcticiqdiibnc3kxkpvvszsff6yr5ofvfn4xvb3plabq"
+        [1m[0msource_type[0m[0m             = "image"
+    }
+
+    timeouts {
+        [1m[0mcreate[0m[0m = "60m"
+    }
+}
+
+
+Outputs:
+
+ads = [
+    {
+        compartment_id = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+        id             = "ocid1.availabilitydomain.oc1..aaaaaaaawx54fdq62jqhpb6ac4hhb7p5zapnm5yvhpyjqv4sdhmr6bfzmeua"
+        name           = "EgzC:SA-SANTIAGO-1-AD-1"
+    },
+]
+bastion-private-ip = "10.1.1.2"
+bastion-public-ip = "129.151.105.245"
+rdg-private-ip = "10.1.0.2"[0m[0m

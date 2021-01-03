@@ -1,0 +1,561 @@
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  [32m+[0m create
+ [36m<=[0m read (data resources)
+[0m
+Terraform will perform the following actions:
+
+[1m  # module.db.data.oci_database_databases.databases[0m will be read during apply
+  # (config refers to values not yet known)[0m[0m
+[0m [36m<=[0m[0m data "oci_database_databases" "databases"  {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdatabases[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mdb_home_id[0m[0m     = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+    }
+
+[1m  # module.db.data.oci_database_db_homes.db_homes[0m will be read during apply
+  # (config refers to values not yet known)[0m[0m
+[0m [36m<=[0m[0m data "oci_database_db_homes" "db_homes"  {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdb_homes[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mdb_system_id[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+    }
+
+[1m  # module.db.data.oci_database_db_node.db_node_details[0m will be read during apply
+  # (config refers to values not yet known)[0m[0m
+[0m [36m<=[0m[0m data "oci_database_db_node" "db_node_details"  {
+      [32m+[0m [0m[1m[0madditional_details[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mbackup_vnic_id[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mdb_node_id[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mdb_system_id[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mfault_domain[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mhostname[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                            = (known after apply)
+      [32m+[0m [0m[1m[0mmaintenance_type[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0msoftware_storage_size_in_gb[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mtime_maintenance_window_end[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mtime_maintenance_window_start[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mvnic_id[0m[0m                       = (known after apply)
+    }
+
+[1m  # module.db.data.oci_database_db_nodes.db_nodes[0m will be read during apply
+  # (config refers to values not yet known)[0m[0m
+[0m [36m<=[0m[0m data "oci_database_db_nodes" "db_nodes"  {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdb_nodes[0m[0m       = (known after apply)
+      [32m+[0m [0m[1m[0mdb_system_id[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+    }
+
+[1m  # module.db.data.oci_database_db_systems.db_systems[0m will be read during apply
+  # (config refers to values not yet known)[0m[0m
+[0m [36m<=[0m[0m data "oci_database_db_systems" "db_systems"  {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdb_systems[0m[0m     = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+
+      [32m+[0m [0mfilter {
+          [32m+[0m [0m[1m[0mname[0m[0m   = "id"
+          [32m+[0m [0m[1m[0mvalues[0m[0m = [
+              [32m+[0m [0m(known after apply),
+            ]
+        }
+    }
+
+[1m  # module.db.data.oci_database_db_versions.test_db_versions_by_db_system_id[0m will be read during apply
+  # (config refers to values not yet known)[0m[0m
+[0m [36m<=[0m[0m data "oci_database_db_versions" "test_db_versions_by_db_system_id"  {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdb_system_id[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mdb_versions[0m[0m    = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+    }
+
+[1m  # module.db.oci_database_db_system.test_db_system[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_database_db_system" "test_db_system" {
+      [32m+[0m [0m[1m[0mavailability_domain[0m[0m                     = "EgzC:US-ASHBURN-AD-2"
+      [32m+[0m [0m[1m[0mbackup_subnet_id[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mcluster_name[0m[0m                            = (known after apply)
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m                          = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mcpu_core_count[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mdata_storage_percentage[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mdata_storage_size_in_gb[0m[0m                 = 256
+      [32m+[0m [0m[1m[0mdatabase_edition[0m[0m                        = "ENTERPRISE_EDITION"
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m                            = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdisk_redundancy[0m[0m                         = "NORMAL"
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m                            = "MyTFDBSystemVM"
+      [32m+[0m [0m[1m[0mdomain[0m[0m                                  = "mydomain"
+      [32m+[0m [0m[1m[0mfault_domains[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mhostname[0m[0m                                = "myoracledb"
+      [32m+[0m [0m[1m[0mid[0m[0m                                      = (known after apply)
+      [32m+[0m [0m[1m[0miorm_config_cache[0m[0m                       = (known after apply)
+      [32m+[0m [0m[1m[0mkms_key_id[0m[0m                              = (known after apply)
+      [32m+[0m [0m[1m[0mkms_key_version_id[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mlast_maintenance_run_id[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mlast_patch_history_entry_id[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mlicense_model[0m[0m                           = "LICENSE_INCLUDED"
+      [32m+[0m [0m[1m[0mlifecycle_details[0m[0m                       = (known after apply)
+      [32m+[0m [0m[1m[0mlistener_port[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mmaintenance_window[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mnext_maintenance_run_id[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mnode_count[0m[0m                              = 1
+      [32m+[0m [0m[1m[0mpoint_in_time_data_disk_clone_timestamp[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mprivate_ip[0m[0m                              = (known after apply)
+      [32m+[0m [0m[1m[0mreco_storage_size_in_gb[0m[0m                 = (known after apply)
+      [32m+[0m [0m[1m[0mscan_dns_record_id[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mscan_ip_ids[0m[0m                             = (known after apply)
+      [32m+[0m [0m[1m[0mshape[0m[0m                                   = "VM.Standard2.4"
+      [32m+[0m [0m[1m[0msource[0m[0m                                  = (known after apply)
+      [32m+[0m [0m[1m[0msource_db_system_id[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0msparse_diskgroup[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mssh_public_keys[0m[0m                         = [
+          [32m+[0m [0m"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCSnsp45Cq5tOofh354wAYoou7MHGrzgFYLyM981UTJW2vtgOO9DNyn5vbkKFdtVNrvCUCjbhSqhhKdJSqX23+fl4/tOVZof0sKWLv9Evj0M4TjJ9isszhtbFfjuh37vAJ1IHnd2E0QsUpL3P2gIHTuoU9hzaCq7mFBRC9aP0Pz4EwLyDBwtErMsiWapARR0nUGLdZMQwANwdvOo9/7hlyiriYwAw3TChWyuYnyDSvO89EugHsail7b+v/Pi7ani+lpp0jMIFkFAtur7kiPFz6TzK6gw75OMZLMf3kilTWMZaKLzIUy/BL2QOtRe1HAdzQA4jqQm0GYkvKRkDzMm2zf ssh-key-2020-12-23",
+        ]
+      [32m+[0m [0m[1m[0mstate[0m[0m                                   = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m                            = (known after apply)
+      [32m+[0m [0m[1m[0mtime_zone[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0mversion[0m[0m                                 = (known after apply)
+      [32m+[0m [0m[1m[0mvip_ids[0m[0m                                 = (known after apply)
+
+      [32m+[0m [0mdb_home {
+          [32m+[0m [0m[1m[0mdatabase_software_image_id[0m[0m  = (known after apply)
+          [32m+[0m [0m[1m[0mdb_home_location[0m[0m            = (known after apply)
+          [32m+[0m [0m[1m[0mdb_version[0m[0m                  = "12.2.0.1.200114"
+          [32m+[0m [0m[1m[0mdefined_tags[0m[0m                = (known after apply)
+          [32m+[0m [0m[1m[0mdisplay_name[0m[0m                = "MyTFDBHomeVm"
+          [32m+[0m [0m[1m[0mfreeform_tags[0m[0m               = (known after apply)
+          [32m+[0m [0m[1m[0mid[0m[0m                          = (known after apply)
+          [32m+[0m [0m[1m[0mlast_patch_history_entry_id[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mlifecycle_details[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mstate[0m[0m                       = (known after apply)
+          [32m+[0m [0m[1m[0mtime_created[0m[0m                = (known after apply)
+
+          [32m+[0m [0mdatabase {
+              [32m+[0m [0m[1m[0madmin_password[0m[0m                        = (sensitive value)
+              [32m+[0m [0m[1m[0mbackup_id[0m[0m                             = (known after apply)
+              [32m+[0m [0m[1m[0mbackup_tde_password[0m[0m                   = (sensitive value)
+              [32m+[0m [0m[1m[0mcharacter_set[0m[0m                         = (known after apply)
+              [32m+[0m [0m[1m[0mconnection_strings[0m[0m                    = (known after apply)
+              [32m+[0m [0m[1m[0mdatabase_id[0m[0m                           = (known after apply)
+              [32m+[0m [0m[1m[0mdatabase_software_image_id[0m[0m            = (known after apply)
+              [32m+[0m [0m[1m[0mdb_domain[0m[0m                             = (known after apply)
+              [32m+[0m [0m[1m[0mdb_name[0m[0m                               = "RNORCL"
+              [32m+[0m [0m[1m[0mdb_unique_name[0m[0m                        = (known after apply)
+              [32m+[0m [0m[1m[0mdb_workload[0m[0m                           = "OLTP"
+              [32m+[0m [0m[1m[0mdefined_tags[0m[0m                          = (known after apply)
+              [32m+[0m [0m[1m[0mfreeform_tags[0m[0m                         = (known after apply)
+              [32m+[0m [0m[1m[0mid[0m[0m                                    = (known after apply)
+              [32m+[0m [0m[1m[0mlifecycle_details[0m[0m                     = (known after apply)
+              [32m+[0m [0m[1m[0mncharacter_set[0m[0m                        = (known after apply)
+              [32m+[0m [0m[1m[0mpdb_name[0m[0m                              = "pdbName"
+              [32m+[0m [0m[1m[0mstate[0m[0m                                 = (known after apply)
+              [32m+[0m [0m[1m[0mtde_wallet_password[0m[0m                   = (sensitive value)
+              [32m+[0m [0m[1m[0mtime_created[0m[0m                          = (known after apply)
+              [32m+[0m [0m[1m[0mtime_stamp_for_point_in_time_recovery[0m[0m = (known after apply)
+
+              [32m+[0m [0mdb_backup_config {
+                  [32m+[0m [0m[1m[0mauto_backup_enabled[0m[0m     = false
+                  [32m+[0m [0m[1m[0mauto_backup_window[0m[0m      = (known after apply)
+                  [32m+[0m [0m[1m[0mrecovery_window_in_days[0m[0m = (known after apply)
+
+                  [32m+[0m [0mbackup_destination_details {
+                      [32m+[0m [0m[1m[0mid[0m[0m   = (known after apply)
+                      [32m+[0m [0m[1m[0mtype[0m[0m = (known after apply)
+                    }
+                }
+            }
+        }
+
+      [32m+[0m [0mdb_system_options {
+          [32m+[0m [0m[1m[0mstorage_management[0m[0m = "LVM"
+        }
+    }
+
+[1m  # module.instance.null_resource.remote-exec-bastion-instance[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "null_resource" "remote-exec-bastion-instance" {
+      [32m+[0m [0m[1m[0mid[0m[0m = (known after apply)
+    }
+
+[1m  # module.instance.null_resource.remote-exec-rdg-instance[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "null_resource" "remote-exec-rdg-instance" {
+      [32m+[0m [0m[1m[0mid[0m[0m = (known after apply)
+    }
+
+[1m  # module.instance.oci_core_instance.bastion-instance[0][0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_instance" "bastion-instance" {
+      [32m+[0m [0m[1m[0mavailability_domain[0m[0m                 = "EgzC:US-ASHBURN-AD-2"
+      [32m+[0m [0m[1m[0mboot_volume_id[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m                      = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdedicated_vm_host_id[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m                        = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m                        = "BASTION-HOST"
+      [32m+[0m [0m[1m[0mfault_domain[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m                       = (known after apply)
+      [32m+[0m [0m[1m[0mhostname_label[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                                  = (known after apply)
+      [32m+[0m [0m[1m[0mimage[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0mipxe_script[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mis_pv_encryption_in_transit_enabled[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mlaunch_mode[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mmetadata[0m[0m                            = {
+          [32m+[0m [0m"ssh_authorized_keys" = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCSnsp45Cq5tOofh354wAYoou7MHGrzgFYLyM981UTJW2vtgOO9DNyn5vbkKFdtVNrvCUCjbhSqhhKdJSqX23+fl4/tOVZof0sKWLv9Evj0M4TjJ9isszhtbFfjuh37vAJ1IHnd2E0QsUpL3P2gIHTuoU9hzaCq7mFBRC9aP0Pz4EwLyDBwtErMsiWapARR0nUGLdZMQwANwdvOo9/7hlyiriYwAw3TChWyuYnyDSvO89EugHsail7b+v/Pi7ani+lpp0jMIFkFAtur7kiPFz6TzK6gw75OMZLMf3kilTWMZaKLzIUy/BL2QOtRe1HAdzQA4jqQm0GYkvKRkDzMm2zf ssh-key-2020-12-23"
+        }
+      [32m+[0m [0m[1m[0mprivate_ip[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mpublic_ip[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mregion[0m[0m                              = (known after apply)
+      [32m+[0m [0m[1m[0mshape[0m[0m                               = "VM.Standard2.1"
+      [32m+[0m [0m[1m[0mstate[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0msystem_tags[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mtime_maintenance_reboot_due[0m[0m         = (known after apply)
+
+      [32m+[0m [0magent_config {
+          [32m+[0m [0m[1m[0mis_management_disabled[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mis_monitoring_disabled[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mavailability_config {
+          [32m+[0m [0m[1m[0mrecovery_action[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mcreate_vnic_details {
+          [32m+[0m [0m[1m[0massign_public_ip[0m[0m       = "true"
+          [32m+[0m [0m[1m[0mdefined_tags[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mdisplay_name[0m[0m           = "Primaryvnic"
+          [32m+[0m [0m[1m[0mfreeform_tags[0m[0m          = (known after apply)
+          [32m+[0m [0m[1m[0mhostname_label[0m[0m         = (known after apply)
+          [32m+[0m [0m[1m[0mprivate_ip[0m[0m             = (known after apply)
+          [32m+[0m [0m[1m[0mskip_source_dest_check[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0msubnet_id[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0mvlan_id[0m[0m                = (known after apply)
+        }
+
+      [32m+[0m [0minstance_options {
+          [32m+[0m [0m[1m[0mare_legacy_imds_endpoints_disabled[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mlaunch_options {
+          [32m+[0m [0m[1m[0mboot_volume_type[0m[0m                    = (known after apply)
+          [32m+[0m [0m[1m[0mfirmware[0m[0m                            = (known after apply)
+          [32m+[0m [0m[1m[0mis_consistent_volume_naming_enabled[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mis_pv_encryption_in_transit_enabled[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mnetwork_type[0m[0m                        = (known after apply)
+          [32m+[0m [0m[1m[0mremote_data_volume_type[0m[0m             = (known after apply)
+        }
+
+      [32m+[0m [0mshape_config {
+          [32m+[0m [0m[1m[0mgpu_description[0m[0m               = (known after apply)
+          [32m+[0m [0m[1m[0mgpus[0m[0m                          = (known after apply)
+          [32m+[0m [0m[1m[0mlocal_disk_description[0m[0m        = (known after apply)
+          [32m+[0m [0m[1m[0mlocal_disks[0m[0m                   = (known after apply)
+          [32m+[0m [0m[1m[0mlocal_disks_total_size_in_gbs[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mmax_vnic_attachments[0m[0m          = (known after apply)
+          [32m+[0m [0m[1m[0mmemory_in_gbs[0m[0m                 = (known after apply)
+          [32m+[0m [0m[1m[0mnetworking_bandwidth_in_gbps[0m[0m  = (known after apply)
+          [32m+[0m [0m[1m[0mocpus[0m[0m                         = (known after apply)
+          [32m+[0m [0m[1m[0mprocessor_description[0m[0m         = (known after apply)
+        }
+
+      [32m+[0m [0msource_details {
+          [32m+[0m [0m[1m[0mboot_volume_size_in_gbs[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mkms_key_id[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0msource_id[0m[0m               = "ocid1.image.oc1.iad.aaaaaaaaf2wxqc6ee5axabpbandk6ji27oyxyicatqw5iwkrk76kecqrrdyq"
+          [32m+[0m [0m[1m[0msource_type[0m[0m             = "image"
+        }
+
+      [32m+[0m [0mtimeouts {
+          [32m+[0m [0m[1m[0mcreate[0m[0m = "60m"
+        }
+    }
+
+[1m  # module.instance.oci_core_instance.rdg-instance[0][0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_instance" "rdg-instance" {
+      [32m+[0m [0m[1m[0mavailability_domain[0m[0m                 = "EgzC:US-ASHBURN-AD-2"
+      [32m+[0m [0m[1m[0mboot_volume_id[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m                      = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdedicated_vm_host_id[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m                        = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m                        = "RDG-HOST"
+      [32m+[0m [0m[1m[0mfault_domain[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m                       = (known after apply)
+      [32m+[0m [0m[1m[0mhostname_label[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                                  = (known after apply)
+      [32m+[0m [0m[1m[0mimage[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0mipxe_script[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mis_pv_encryption_in_transit_enabled[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mlaunch_mode[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mmetadata[0m[0m                            = {
+          [32m+[0m [0m"ssh_authorized_keys" = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCSnsp45Cq5tOofh354wAYoou7MHGrzgFYLyM981UTJW2vtgOO9DNyn5vbkKFdtVNrvCUCjbhSqhhKdJSqX23+fl4/tOVZof0sKWLv9Evj0M4TjJ9isszhtbFfjuh37vAJ1IHnd2E0QsUpL3P2gIHTuoU9hzaCq7mFBRC9aP0Pz4EwLyDBwtErMsiWapARR0nUGLdZMQwANwdvOo9/7hlyiriYwAw3TChWyuYnyDSvO89EugHsail7b+v/Pi7ani+lpp0jMIFkFAtur7kiPFz6TzK6gw75OMZLMf3kilTWMZaKLzIUy/BL2QOtRe1HAdzQA4jqQm0GYkvKRkDzMm2zf ssh-key-2020-12-23"
+        }
+      [32m+[0m [0m[1m[0mprivate_ip[0m[0m                          = (known after apply)
+      [32m+[0m [0m[1m[0mpublic_ip[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0mregion[0m[0m                              = (known after apply)
+      [32m+[0m [0m[1m[0mshape[0m[0m                               = "VM.Standard2.1"
+      [32m+[0m [0m[1m[0mstate[0m[0m                               = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_id[0m[0m                           = (known after apply)
+      [32m+[0m [0m[1m[0msystem_tags[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m                        = (known after apply)
+      [32m+[0m [0m[1m[0mtime_maintenance_reboot_due[0m[0m         = (known after apply)
+
+      [32m+[0m [0magent_config {
+          [32m+[0m [0m[1m[0mis_management_disabled[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mis_monitoring_disabled[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mavailability_config {
+          [32m+[0m [0m[1m[0mrecovery_action[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mcreate_vnic_details {
+          [32m+[0m [0m[1m[0massign_public_ip[0m[0m       = "false"
+          [32m+[0m [0m[1m[0mdefined_tags[0m[0m           = (known after apply)
+          [32m+[0m [0m[1m[0mdisplay_name[0m[0m           = "Primaryvnic"
+          [32m+[0m [0m[1m[0mfreeform_tags[0m[0m          = (known after apply)
+          [32m+[0m [0m[1m[0mhostname_label[0m[0m         = (known after apply)
+          [32m+[0m [0m[1m[0mprivate_ip[0m[0m             = (known after apply)
+          [32m+[0m [0m[1m[0mskip_source_dest_check[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0msubnet_id[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0mvlan_id[0m[0m                = (known after apply)
+        }
+
+      [32m+[0m [0minstance_options {
+          [32m+[0m [0m[1m[0mare_legacy_imds_endpoints_disabled[0m[0m = (known after apply)
+        }
+
+      [32m+[0m [0mlaunch_options {
+          [32m+[0m [0m[1m[0mboot_volume_type[0m[0m                    = (known after apply)
+          [32m+[0m [0m[1m[0mfirmware[0m[0m                            = (known after apply)
+          [32m+[0m [0m[1m[0mis_consistent_volume_naming_enabled[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mis_pv_encryption_in_transit_enabled[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mnetwork_type[0m[0m                        = (known after apply)
+          [32m+[0m [0m[1m[0mremote_data_volume_type[0m[0m             = (known after apply)
+        }
+
+      [32m+[0m [0mshape_config {
+          [32m+[0m [0m[1m[0mgpu_description[0m[0m               = (known after apply)
+          [32m+[0m [0m[1m[0mgpus[0m[0m                          = (known after apply)
+          [32m+[0m [0m[1m[0mlocal_disk_description[0m[0m        = (known after apply)
+          [32m+[0m [0m[1m[0mlocal_disks[0m[0m                   = (known after apply)
+          [32m+[0m [0m[1m[0mlocal_disks_total_size_in_gbs[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mmax_vnic_attachments[0m[0m          = (known after apply)
+          [32m+[0m [0m[1m[0mmemory_in_gbs[0m[0m                 = (known after apply)
+          [32m+[0m [0m[1m[0mnetworking_bandwidth_in_gbps[0m[0m  = (known after apply)
+          [32m+[0m [0m[1m[0mocpus[0m[0m                         = (known after apply)
+          [32m+[0m [0m[1m[0mprocessor_description[0m[0m         = (known after apply)
+        }
+
+      [32m+[0m [0msource_details {
+          [32m+[0m [0m[1m[0mboot_volume_size_in_gbs[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mkms_key_id[0m[0m              = (known after apply)
+          [32m+[0m [0m[1m[0msource_id[0m[0m               = "ocid1.image.oc1.iad.aaaaaaaaraizp7oxtm47pk25gicdwjiwj7ar6s2eef5xcgxgkippu5rj7xsq"
+          [32m+[0m [0m[1m[0msource_type[0m[0m             = "image"
+        }
+
+      [32m+[0m [0mtimeouts {
+          [32m+[0m [0m[1m[0mcreate[0m[0m = "60m"
+        }
+    }
+
+[1m  # module.vcn.oci_core_internet_gateway.test_rdg_internet_gateway[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_internet_gateway" "test_rdg_internet_gateway" {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m   = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m   = "internet-gw"
+      [32m+[0m [0m[1m[0menabled[0m[0m        = true
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m  = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mvcn_id[0m[0m         = (known after apply)
+    }
+
+[1m  # module.vcn.oci_core_route_table.priv_subnet_route_table_test_rdg[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_route_table" "priv_subnet_route_table_test_rdg" {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m   = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m  = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mvcn_id[0m[0m         = (known after apply)
+    }
+
+[1m  # module.vcn.oci_core_route_table.pub_subnet_route_table_test_rdg[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_route_table" "pub_subnet_route_table_test_rdg" {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m   = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m  = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mvcn_id[0m[0m         = (known after apply)
+
+      [32m+[0m [0mroute_rules {
+          [32m+[0m [0m[1m[0mcidr_block[0m[0m        = (known after apply)
+          [32m+[0m [0m[1m[0mdescription[0m[0m       = "internet-gw"
+          [32m+[0m [0m[1m[0mdestination[0m[0m       = "0.0.0.0/0"
+          [32m+[0m [0m[1m[0mdestination_type[0m[0m  = "CIDR_BLOCK"
+          [32m+[0m [0m[1m[0mnetwork_entity_id[0m[0m = (known after apply)
+        }
+    }
+
+[1m  # module.vcn.oci_core_security_list.test-rdg-security-list[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_security_list" "test-rdg-security-list" {
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m   = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m   = "sec-list-windows-bastion"
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m  = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mvcn_id[0m[0m         = (known after apply)
+
+      [32m+[0m [0megress_security_rules {
+          [32m+[0m [0m[1m[0mdescription[0m[0m      = "Agress to All"
+          [32m+[0m [0m[1m[0mdestination[0m[0m      = "0.0.0.0/0"
+          [32m+[0m [0m[1m[0mdestination_type[0m[0m = "CIDR_BLOCK"
+          [32m+[0m [0m[1m[0mprotocol[0m[0m         = "all"
+          [32m+[0m [0m[1m[0mstateless[0m[0m        = (known after apply)
+        }
+
+      [32m+[0m [0mingress_security_rules {
+          [32m+[0m [0m[1m[0mdescription[0m[0m = "Ingress solo TCP"
+          [32m+[0m [0m[1m[0mprotocol[0m[0m    = "all"
+          [32m+[0m [0m[1m[0msource[0m[0m      = "0.0.0.0/0"
+          [32m+[0m [0m[1m[0msource_type[0m[0m = (known after apply)
+          [32m+[0m [0m[1m[0mstateless[0m[0m   = false
+        }
+    }
+
+[1m  # module.vcn.oci_core_subnet.private-subnet-rdg[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_subnet" "private-subnet-rdg" {
+      [32m+[0m [0m[1m[0mavailability_domain[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0mcidr_block[0m[0m                 = "10.1.0.0/24"
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m             = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m               = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdhcp_options_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m               = "private-subnet-rdg"
+      [32m+[0m [0m[1m[0mdns_label[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mipv6cidr_block[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mipv6public_cidr_block[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mipv6virtual_router_ip[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mprohibit_public_ip_on_vnic[0m[0m = true
+      [32m+[0m [0m[1m[0mroute_table_id[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0msecurity_list_ids[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_domain_name[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mvcn_id[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mvirtual_router_ip[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mvirtual_router_mac[0m[0m         = (known after apply)
+    }
+
+[1m  # module.vcn.oci_core_subnet.public-subnet-rdg[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_subnet" "public-subnet-rdg" {
+      [32m+[0m [0m[1m[0mavailability_domain[0m[0m        = (known after apply)
+      [32m+[0m [0m[1m[0mcidr_block[0m[0m                 = "10.1.1.0/24"
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m             = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m               = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdhcp_options_id[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m               = "public-subnet-rdg"
+      [32m+[0m [0m[1m[0mdns_label[0m[0m                  = (known after apply)
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                         = (known after apply)
+      [32m+[0m [0m[1m[0mipv6cidr_block[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mipv6public_cidr_block[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mipv6virtual_router_ip[0m[0m      = (known after apply)
+      [32m+[0m [0m[1m[0mprohibit_public_ip_on_vnic[0m[0m = false
+      [32m+[0m [0m[1m[0mroute_table_id[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0msecurity_list_ids[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m                      = (known after apply)
+      [32m+[0m [0m[1m[0msubnet_domain_name[0m[0m         = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m               = (known after apply)
+      [32m+[0m [0m[1m[0mvcn_id[0m[0m                     = (known after apply)
+      [32m+[0m [0m[1m[0mvirtual_router_ip[0m[0m          = (known after apply)
+      [32m+[0m [0m[1m[0mvirtual_router_mac[0m[0m         = (known after apply)
+    }
+
+[1m  # module.vcn.oci_core_vcn.vcn-test-rdg[0m will be created[0m[0m
+[0m  [32m+[0m[0m resource "oci_core_vcn" "vcn-test-rdg" {
+      [32m+[0m [0m[1m[0mcidr_block[0m[0m               = "10.1.0.0/16"
+      [32m+[0m [0m[1m[0mcidr_blocks[0m[0m              = (known after apply)
+      [32m+[0m [0m[1m[0mcompartment_id[0m[0m           = "ocid1.compartment.oc1..aaaaaaaahr5yytqlt3bdb7vv4r5ngr6ahe4sj2kpqkq6bqsdrdi64nvrbc3q"
+      [32m+[0m [0m[1m[0mdefault_dhcp_options_id[0m[0m  = (known after apply)
+      [32m+[0m [0m[1m[0mdefault_route_table_id[0m[0m   = (known after apply)
+      [32m+[0m [0m[1m[0mdefault_security_list_id[0m[0m = (known after apply)
+      [32m+[0m [0m[1m[0mdefined_tags[0m[0m             = {
+          [32m+[0m [0m"lad-mcr-s.pais" = "Chile"
+        }
+      [32m+[0m [0m[1m[0mdisplay_name[0m[0m             = "vcn-test-rdg"
+      [32m+[0m [0m[1m[0mdns_label[0m[0m                = (known after apply)
+      [32m+[0m [0m[1m[0mfreeform_tags[0m[0m            = (known after apply)
+      [32m+[0m [0m[1m[0mid[0m[0m                       = (known after apply)
+      [32m+[0m [0m[1m[0mipv6cidr_block[0m[0m           = (known after apply)
+      [32m+[0m [0m[1m[0mipv6public_cidr_block[0m[0m    = (known after apply)
+      [32m+[0m [0m[1m[0mis_ipv6enabled[0m[0m           = (known after apply)
+      [32m+[0m [0m[1m[0mstate[0m[0m                    = (known after apply)
+      [32m+[0m [0m[1m[0mtime_created[0m[0m             = (known after apply)
+      [32m+[0m [0m[1m[0mvcn_domain_name[0m[0m          = (known after apply)
+    }
+
+[0m[1mPlan:[0m 12 to add, 0 to change, 0 to destroy.[0m
+[0m
+[1mChanges to Outputs:[0m
+  [32m+[0m [0m[1m[0mads[0m[0m                       = [
+      [32m+[0m [0m{
+          [32m+[0m [0mcompartment_id = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+          [32m+[0m [0mid             = "ocid1.availabilitydomain.oc1..aaaaaaaaztunlny6ae4yw2vghp5go2zceaonwp6wiioe3tnh2vlaxjjl2n3a"
+          [32m+[0m [0mname           = "EgzC:US-ASHBURN-AD-1"
+        },
+      [32m+[0m [0m{
+          [32m+[0m [0mcompartment_id = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+          [32m+[0m [0mid             = "ocid1.availabilitydomain.oc1..aaaaaaaatrwxaogr7dl4yschqtrmqrdv6uzis3mgbnomiagqrfhcb7mxsfdq"
+          [32m+[0m [0mname           = "EgzC:US-ASHBURN-AD-2"
+        },
+      [32m+[0m [0m{
+          [32m+[0m [0mcompartment_id = "ocid1.tenancy.oc1..aaaaaaaavl2ndgiiefoo2u4a7atlq2czcwyiu5zzb6rzwwpeyt5o2xmtaxwa"
+          [32m+[0m [0mid             = "ocid1.availabilitydomain.oc1..aaaaaaaauvt2n7pijol7uqgdnnsoojcukrijtmcltvfwxazmitk235wyohta"
+          [32m+[0m [0mname           = "EgzC:US-ASHBURN-AD-3"
+        },
+    ]
+  [32m+[0m [0m[1m[0mbastion-private-ip[0m[0m        = (known after apply)
+  [32m+[0m [0m[1m[0mbastion-public-ip[0m[0m         = (known after apply)
+  [32m+[0m [0m[1m[0mrdg-private-ip[0m[0m            = (known after apply)
+  [32m+[0m [0m[1m[0mtest_db_system-private_ip[0m[0m = (known after apply)[0m
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+
