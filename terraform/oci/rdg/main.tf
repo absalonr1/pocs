@@ -45,12 +45,12 @@ module "oac" {
   compartment_ocid=var.compartment_ocid
 }
 
-/* module "load-balancer"{
+module "load-balancer"{
   source ="./lbaas"
   oac_instance_private_ip="172.0.0.1"
   subnet_id=module.vcn.public_subnet_id 
   compartment_ocid=var.compartment_ocid
-} */
+}
 
 
 

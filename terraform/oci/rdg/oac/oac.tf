@@ -16,7 +16,7 @@ resource "oci_analytics_analytics_instance" "rdg_analytics_instance" {
 
     description = "test-rdg"
     email_notification = "absalon.opazo@oracle.com"
-
+    #idcs_access_token = "var.idcs_access_token"
     network_endpoint_details {
         #Required
         network_endpoint_type = "PRIVATE"
