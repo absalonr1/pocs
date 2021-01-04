@@ -6,7 +6,7 @@ module "vcn"{
 }
 
 
-/*  module "instance"{
+ module "instance"{
     source = "./instance"
     tenancy_ocid = var.tenancy_ocid
     instance_shape=var.instance_shape
@@ -23,7 +23,7 @@ module "vcn"{
     private_subnet_id=module.vcn.private_subnet_id 
     region=var.region
     ad_number= var.ad_number
-}  */
+} 
 
 /*
  module "db"{
@@ -38,16 +38,16 @@ module "vcn"{
 } 
 */
 
-module "oac" {
+/* module "oac" {
   source = "./oac"
   private_subnet_id=module.vcn.private_subnet_id 
   vcn_id=module.vcn.vcn_id
   compartment_ocid=var.compartment_ocid
-}
+} */
 
 module "load-balancer"{
   source ="./lbaas"
-  oac_instance_private_ip="172.0.0.1"
+  oac_instance_private_ip="10.1.0.2"
   subnet_id=module.vcn.public_subnet_id 
   compartment_ocid=var.compartment_ocid
 }

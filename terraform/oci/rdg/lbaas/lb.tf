@@ -37,7 +37,7 @@ resource "oci_load_balancer_backend_set" "oac_backend_set" {
   }
 }
 
-/* resource "oci_load_balancer_backend" "oac-backend" {
+resource "oci_load_balancer_backend" "oac-backend" {
   load_balancer_id = oci_load_balancer.oac_load_balancer.id
   backendset_name  = oci_load_balancer_backend_set.oac_backend_set.name
   ip_address       = var.oac_instance_private_ip
@@ -46,4 +46,4 @@ resource "oci_load_balancer_backend_set" "oac_backend_set" {
   drain            = false
   offline          = false
   weight           = 1
-} */
+}
