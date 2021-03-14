@@ -10,6 +10,7 @@ public class App {
         String name = "Deploying to OCI with terraform Activity guide";
         PdfDocument pdf = new PdfDocument(new PdfWriter("/home/absalon/"+name+".pdf"));
         Document document = new Document(pdf);
+        // test !!
         //String line = "Hello! Welcome to iTextPdf";
         //document.add(new Paragraph(line));
 
