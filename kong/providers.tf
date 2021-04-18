@@ -110,6 +110,19 @@ resource "aws_instance" "kong_vm" {
   security_groups = [aws_security_group.sg_kong.id]
   subnet_id = aws_subnet.pub_subnet_kong.id
 
+  user_data = <<-EOF
+		#! /bin/bash
+    wget https://bintray.com/kong/kong-rpm/download_file?file_path=amazonlinux/amazonlinux2/kong-2.4.0.aws.amd64.rpm -o kong-2.4.0.aws.amd64.rpm
+    sudo yum install kong-2.4.0.aws.amd64.rpm --nogpgcheck
+    sudo yum update -y
+    sudo yum install -y wget
+    wget https://bintray.com/kong/kong-rpm/rpm -O bintray-kong-kong-rpm.repo
+    sed -i -e 's/baseurl.*/&\/amazonlinux\/amazonlinux'/ bintray-kong-kong-rpm.repo
+    sudo mv bintray-kong-kong-rpm.repo /etc/yum.repos.d/
+    sudo yum update -y
+    sudo yum install -y kong
+	EOF
+
   tags = {
     Name = "kong_vm"
   }
@@ -133,6 +146,8 @@ resource "aws_route_table_association" "subnet_association_priv" {
 }
 
 resource "aws_db_instance" "kong_bd" {
+  publicly_accessible = true
+  name                = "kongbd"
   allocated_storage    = 100
   db_subnet_group_name = "kong_bd_subnet_group"
   engine               = "postgres"
@@ -144,6 +159,7 @@ resource "aws_db_instance" "kong_bd" {
   #storage_encrypted    = true
   username             = "postgres"
   depends_on            = [aws_db_subnet_group.kong_bd_subnet_group]
+  vpc_security_group_ids = [aws_security_group.sg_kong.id]
 }
 
 #Leeme: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets
