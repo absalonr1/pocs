@@ -56,6 +56,10 @@ route {
     gateway_id = aws_internet_gateway.igw_kong.id
   }
 
+  tags = {
+    Name = "route_table_kong"
+  }
+
 }
 
 resource "aws_route_table_association" "subnet-association" {
@@ -90,7 +94,9 @@ ingress {
    cidr_blocks = ["0.0.0.0/0"]
  }
 
-
+tags = {
+    Name = "sg_kong"
+  }
 }
 
 #-----------------------------
