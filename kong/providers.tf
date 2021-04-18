@@ -78,6 +78,16 @@ ingress {
     to_port = 22
     protocol = "tcp"
   }
+
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 8000
+    to_port = 8000
+    protocol = "tcp"
+  }
+
   ingress {
     cidr_blocks = [
       "0.0.0.0/0"
@@ -127,6 +137,7 @@ resource "aws_instance" "kong_vm" {
     sudo mv bintray-kong-kong-rpm.repo /etc/yum.repos.d/
     sudo yum update -y
     sudo yum install -y kong
+    cp /etc/kong/kong.conf.default /etc/kong/kong.conf
 	EOF
 
   tags = {
