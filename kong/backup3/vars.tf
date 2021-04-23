@@ -52,6 +52,33 @@ variable "ssl_policy" {
   default = "ELBSecurityPolicy-TLS-1-2-2017-01"
 }
 
+variable "kong_vm_user_data"{
+
+  default = <<-EOF
+      #! /bin/bash
+      wget https://bintray.com/kong/kong-rpm/download_file?file_path=amazonlinux/amazonlinux2/kong-2.4.0.aws.amd64.rpm -o kong-2.4.0.aws.amd64.rpm
+      sudo yum install kong-2.4.0.aws.amd64.rpm --nogpgcheck
+      sudo yum update -y
+      sudo yum install -y wget
+      wget https://bintray.com/kong/kong-rpm/rpm -O bintray-kong-kong-rpm.repo
+      sed -i -e 's/baseurl.*/&\/amazonlinux\/amazonlinux'/ bintray-kong-kong-rpm.repo
+      sudo mv bintray-kong-kong-rpm.repo /etc/yum.repos.d/
+      sudo yum update -y
+      sudo yum install -y kong
+      cp /etc/kong/kong.conf.default /etc/kong/kong.conf
+      
+      # INICIO : lo siguiente es solo para pruebas. Bo usa BD
+      touch test
+      kong config init
+      echo "admin_listen = 0.0.0.0:8001" >> /etc/kong/kong.conf
+      echo "database = off" >> /etc/kong/kong.conf
+      echo "declarative_config = /kong.yml"  >> /etc/kong/kong.conf
+      # FIN  
+      /usr/local/bin/kong start [-c /etc/kong/kong.conf]
+      
+    EOF
+
+}
 
 variable "ami" {
   type = map(string)
@@ -102,21 +129,6 @@ variable "db_password" {
 variable "db_username" {
   default = "postgres"
 }
-
-#----------- "equema" de KONG en postgress -----------
-variable "kong_db_password" {
-  default = "kong"
-}
-
-variable "kong_db_username" {
-  default = "kong"
-}
-
-variable "kong_db" {
-  default = "kong"
-}
-#-----------------------------------------------------
-
 
 # Postgres
 variable "db_engine_version" {
