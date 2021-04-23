@@ -33,6 +33,16 @@ resource "aws_instance" "kong_vm_1" {
     sudo yum update -y
     sudo yum install -y kong
     cp /etc/kong/kong.conf.default /etc/kong/kong.conf
+    
+    # INICIO : lo siguiente es solo para pruebas. Bo usa BD
+    touch test
+    kong config init
+    echo "admin_listen = 0.0.0.0:8001" >> /etc/kong/kong.conf
+    echo "database = off" >> /etc/kong/kong.conf
+    echo "declarative_config = /kong.yml"  >> /etc/kong/kong.conf
+    # FIN  
+    /usr/local/bin/kong start [-c /etc/kong/kong.conf]
+    
 	EOF
 
   tags = {
@@ -62,6 +72,16 @@ resource "aws_instance" "kong_vm_2" {
     sudo yum update -y
     sudo yum install -y kong
     cp /etc/kong/kong.conf.default /etc/kong/kong.conf
+    
+    # INICIO : lo siguiente es solo para pruebas. Bo usa BD
+    touch test
+    kong config init
+    echo "admin_listen = 0.0.0.0:8001" >> /etc/kong/kong.conf
+    echo "database = off" >> /etc/kong/kong.conf
+    echo "declarative_config = /kong.yml"  >> /etc/kong/kong.conf
+    # FIN  
+    /usr/local/bin/kong start [-c /etc/kong/kong.conf]
+
 	EOF
 
   tags = {
@@ -69,3 +89,37 @@ resource "aws_instance" "kong_vm_2" {
   }
   
 }
+
+output "public_ip1" {
+  description = ""
+  value       =   aws_instance.kong_vm_1.public_ip
+}
+
+output "public_ip2" {
+  description = ""
+  value       =   aws_instance.kong_vm_2.public_ip
+}
+
+/*
+output "public_ip" {
+  description = "List of public IP addresses assigned to the instances, if applicable"
+  value       =   aws_instance.kong_vm_2.public_ip
+}
+
+output "private_dns" {
+  description = "List of private DNS names assigned to the instances. Can only be used inside the Amazon EC2, and only available if you've enabled DNS hostnames for your VPC"
+  value       = aws_instance.kong_vm_2.private_dns
+}
+
+output "private_ip" {
+  description = "List of private IP addresses assigned to the instances"
+  value       = aws_instance.kong_vm_2.private_ip
+}
+
+output "public_dns" {
+  description = "List of public DNS names assigned to the instances. For EC2-VPC, this is only available if you've enabled DNS hostnames for your VPC"
+  value       = aws_instance.kong_vm_2.public_dns
+}
+*/
+
+

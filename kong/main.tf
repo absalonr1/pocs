@@ -23,6 +23,15 @@ resource "aws_security_group" "sg_kong" {
     cidr_blocks = [
       "0.0.0.0/0"
     ]
+    from_port = 8001
+    to_port   = 8001
+    protocol  = "tcp"
+  }
+
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
     from_port = 5432
     to_port   = 5432
     protocol  = "tcp"

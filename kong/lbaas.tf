@@ -14,7 +14,7 @@ resource "aws_lb" "external_lbaas_kong" {
 resource "aws_lb_listener" "external-http" {
 
   load_balancer_arn = aws_lb.external_lbaas_kong.arn
-  port              = "80"
+  port              = "8000"
   protocol          = "HTTP"
 
   #ssl_policy      = var.ssl_policy
@@ -31,7 +31,7 @@ resource "aws_lb_listener" "external-http" {
 resource "aws_lb_target_group" "kong_tg" {
 
   name     = "kongtargetgroup"
-  port     = 8001
+  port     = 8000
   protocol = "HTTP"
   vpc_id   = aws_vpc.kong_vpc.id
 
