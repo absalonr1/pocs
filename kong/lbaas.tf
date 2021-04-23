@@ -14,7 +14,7 @@ resource "aws_lb" "external_lbaas_kong" {
 resource "aws_lb_listener" "external-http" {
 
   load_balancer_arn = aws_lb.external_lbaas_kong.arn
-  port              = "8000"
+  port              = "80"
   protocol          = "HTTP"
 
   #ssl_policy      = var.ssl_policy
