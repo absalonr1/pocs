@@ -25,7 +25,7 @@ export KONG_PLUGINS="bundled,jwt-keycloak"
 export JWT_KEYCLOAK_PRIORITY="900"
 echo "plugins = bundled,jwt-keycloak" >> /etc/kong/kong.conf
 
-# Permite llamadas desde el LbaaS a las APIs de admin
+# Permite llamadas desde el LbaaS
 echo "admin_listen = 0.0.0.0:8001" >> /etc/kong/kong.conf
 
 #DB Postgres
