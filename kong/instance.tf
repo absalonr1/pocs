@@ -1,33 +1,95 @@
-resource "aws_eip" "eip_kong_1" {
+/* resource "aws_eip" "eip_kong_bastion" {
 
-  instance   = aws_instance.kong_vm_1.id
+  instance   = aws_instance.kong_bastion.id
   vpc        = true
   depends_on = [aws_internet_gateway.igw_kong]
-}
-resource "aws_eip" "eip_kong_2" {
+} */
 
-  instance   = aws_instance.kong_vm_2.id
-  vpc        = true
-  depends_on = [aws_internet_gateway.igw_kong]
+resource "aws_security_group" "sg_kong" {
+  name   = "sg_kong_allow-all-sg"
+  vpc_id = aws_vpc.kong_vpc.id
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
+  }
+
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 8000
+    to_port   = 8000
+    protocol  = "tcp"
+  }
+
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 8001
+    to_port   = 8001
+    protocol  = "tcp"
+  }
+
+  // Terraform removes the default rule
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "sg_kong"
+  }
 }
 
+resource "aws_security_group" "sg_kong_bastion" {
+  name   = "sg_kong_bastion"
+  vpc_id = aws_vpc.kong_vpc.id
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
+  }
+
+  // Terraform removes the default rule
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "sg_kong_bastion"
+  }
+}
 
 resource "aws_instance" "kong_vm_1" {
-  ami                         = var.ami[var.environment] #"ami-0742b4e673072066f"
+  ami                         = var.ami[var.region][var.environment]
   instance_type               = var.instance_type[var.environment] #"t2.micro"
-  associate_public_ip_address = true
+  #associate_public_ip_address = true
   #key_name - (Optional) Key name of the Key Pair to use for the instance; which can be managed using the aws_key_pair resource.
   key_name        = var.key_pair
   security_groups = [aws_security_group.sg_kong.id]
   subnet_id       = aws_subnet.subnet_kong_1.id
 
-  user_data = templatefile("user_data.tpl",{
+  user_data = templatefile("user_data-no_bd.tpl",{})
+/*   user_data = templatefile("user_data.tpl",{
         db_ip = aws_db_instance.kong_bd.address, 
         db_pg_database=var.kong_db, 
         db_pg_user=var.kong_db_username, db_pg_password=var.kong_db_password }
-        ) #var.kong_vm_user_data
+        ) 
 
-  depends_on = [aws_db_instance.kong_bd]
+ depends_on = [aws_db_instance.kong_bd] */
 
   tags = {
     Name = "kong_vm_1"
@@ -36,22 +98,22 @@ resource "aws_instance" "kong_vm_1" {
 }
 
 resource "aws_instance" "kong_vm_2" {
-  ami                         = "ami-0742b4e673072066f"
-  instance_type               = "t2.micro"
-  associate_public_ip_address = true
+  ami                         = var.ami[var.region][var.environment]
+  instance_type               = var.instance_type[var.environment] #"t2.micro"
+  #associate_public_ip_address = true
   #key_name - (Optional) Key name of the Key Pair to use for the instance; which can be managed using the aws_key_pair resource.
-  key_name        = "aopazo-kong"
+  key_name        = var.key_pair
   security_groups = [aws_security_group.sg_kong.id]
   subnet_id       = aws_subnet.subnet_kong_2.id
 
-  user_data = templatefile("user_data.tpl",{
+  user_data = templatefile("user_data-no_bd.tpl",{})
+/*   user_data = templatefile("user_data.tpl",{
         db_ip = aws_db_instance.kong_bd.address, 
         db_pg_database=var.kong_db, 
-        db_pg_user=var.kong_db_username, db_pg_password=var.kong_db_password 
-        }
-  ) #var.kong_vm_user_data
-  
-  depends_on = [aws_db_instance.kong_bd]
+        db_pg_user=var.kong_db_username, db_pg_password=var.kong_db_password }
+        ) 
+
+ depends_on = [aws_db_instance.kong_bd] */
 
   tags = {
     Name = "kong_vm_2"
@@ -59,15 +121,26 @@ resource "aws_instance" "kong_vm_2" {
 
 }
 
-output "public_ip1" {
-  description = ""
-  value       = aws_instance.kong_vm_1.public_ip
+resource "aws_instance" "kong_bastion" {
+  ami                         = var.ami[var.region][var.environment]
+  instance_type               = var.instance_type[var.environment] #"t2.micro"
+  associate_public_ip_address = true
+  #key_name - (Optional) Key name of the Key Pair to use for the instance; which can be managed using the aws_key_pair resource.
+  key_name        = var.key_pair
+  security_groups = [aws_security_group.sg_kong_bastion.id]
+  subnet_id       = aws_subnet.subnet_lbaas_1.id
+
+  tags = {
+    Name = "kong_bastion"
+  }
+
 }
 
-output "public_ip2" {
+output "kong_bastion_public_ip" {
   description = ""
-  value       = aws_instance.kong_vm_2.public_ip
+  value       = aws_instance.kong_bastion.public_ip
 }
+
 
 /*
 output "public_ip" {

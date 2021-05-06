@@ -1,3 +1,6 @@
+variable "region" {
+  default = "us-west-2"
+}
 
 variable "health_check_interval" {
   description = "Seconds between health checks"
@@ -49,7 +52,7 @@ variable "key_pair" {
   type        = string
 
   # Terraform default is 60
-  default = "aopazo-kong"
+  default = "kong-key-pair"
 }
 variable "ssl_policy" {
   description = "SSL Policy for HTTPS Listeners"
@@ -59,7 +62,8 @@ variable "ssl_policy" {
 }
 
 
-variable "ami" {
+// us-east-1
+variable "ami2" {
   type = map(string)
 
   default = {
@@ -68,6 +72,27 @@ variable "ami" {
     poc = "ami-0742b4e673072066f"
   }
 }
+
+// Oregon
+variable "ami" {
+  type = map(map(string))
+
+  default = {
+    us-west-2 ={
+      prod = "ami-0742b4e673072066f"
+      dev = "ami-0742b4e673072066f"
+      poc = "ami-0cf6f5c8a62fa5da6"
+  
+    }
+    us-east-1 ={
+      prod = "ami-0742b4e673072066f"
+      dev = "ami-0742b4e673072066f"
+      poc = "ami-0742b4e673072066f"
+  
+    }
+  }
+}
+
 
 
 # https://docs.konghq.com/enterprise/2.3.x/sizing-guidelines/

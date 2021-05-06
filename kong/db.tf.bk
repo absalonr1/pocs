@@ -27,3 +27,31 @@ resource "aws_db_subnet_group" "kong_bd_subnet_group" {
 #  value       = join("", aws_db_subnet_group.default.*.id)
 #  description = "ID of the created Subnet Group"
 #}
+
+
+resource "aws_security_group" "sg_kong_bd" {
+  name   = "sg_kong_bd"
+  vpc_id = aws_vpc.kong_vpc.id
+
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 5432
+    to_port   = 5432
+    protocol  = "tcp"
+  }
+  // Terraform removes the default rule
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "sg_kong_bd"
+  }
+}
+
+

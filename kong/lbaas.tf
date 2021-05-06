@@ -2,13 +2,47 @@ resource "aws_lb" "external_lbaas_kong" {
 
   name     = "externalLbaasKong"
   internal = false
-  subnets  = [aws_subnet.subnet_kong_1.id, aws_subnet.subnet_kong_2.id] #data.aws_subnet_ids.public.ids
+  subnets  = [aws_subnet.subnet_lbaas_1.id, aws_subnet.subnet_lbaas_2.id] #data.aws_subnet_ids.public.ids
 
   security_groups = [aws_security_group.sg_lbaas_kong.id]
 
   #enable_deletion_protection = var.enable_deletion_protection
   idle_timeout = var.idle_timeout
 
+}
+resource "aws_security_group" "sg_lbaas_kong" {
+  name   = "sg_lbaas_kong"
+  vpc_id = aws_vpc.kong_vpc.id
+
+
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
+  }
+
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+  }
+  // Terraform removes the default rule
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "sg_lbaas_kong"
+  }
 }
 
 resource "aws_lb_listener" "external-http" {
