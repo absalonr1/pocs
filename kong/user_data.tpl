@@ -44,5 +44,5 @@ echo "pg_database =${db_pg_database}" >> /etc/kong/kong.conf
 #---- con el start de kong
 #---- tarea manual mientras se ve como automatizar
 #-------------------------------------------------------------------
-#sudo /usr/local/bin/kong migrations bootstrap [-c /etc/kong/kong.conf]
+sudo /usr/local/bin/kong migrations bootstrap [-c /etc/kong/kong.conf]
 #/usr/local/bin/kong start [-c /etc/kong/kong.conf]
