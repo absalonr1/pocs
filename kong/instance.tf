@@ -82,14 +82,14 @@ resource "aws_instance" "kong_vm_1" {
   security_groups = [aws_security_group.sg_kong.id]
   subnet_id       = aws_subnet.subnet_kong_1.id
 
-  user_data = templatefile("user_data-no_bd.tpl",{})
-/*   user_data = templatefile("user_data.tpl",{
+#  user_data = templatefile("user_data-no_bd.tpl",{})
+  user_data = templatefile("user_data.tpl",{
         db_ip = aws_db_instance.kong_bd.address, 
         db_pg_database=var.kong_db, 
         db_pg_user=var.kong_db_username, db_pg_password=var.kong_db_password }
         ) 
 
- depends_on = [aws_db_instance.kong_bd] */
+ depends_on = [aws_db_instance.kong_bd]
 
   tags = {
     Name = "kong_vm_1"
@@ -106,14 +106,14 @@ resource "aws_instance" "kong_vm_2" {
   security_groups = [aws_security_group.sg_kong.id]
   subnet_id       = aws_subnet.subnet_kong_2.id
 
-  user_data = templatefile("user_data-no_bd.tpl",{})
-/*   user_data = templatefile("user_data.tpl",{
+#  user_data = templatefile("user_data-no_bd.tpl",{})
+  user_data = templatefile("user_data.tpl",{
         db_ip = aws_db_instance.kong_bd.address, 
         db_pg_database=var.kong_db, 
         db_pg_user=var.kong_db_username, db_pg_password=var.kong_db_password }
         ) 
 
- depends_on = [aws_db_instance.kong_bd] */
+ depends_on = [aws_db_instance.kong_bd]
 
   tags = {
     Name = "kong_vm_2"

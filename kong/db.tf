@@ -7,14 +7,14 @@ resource "aws_db_instance" "kong_bd" {
   engine               = "postgres"
   engine_version       = var.db_engine_version
   identifier           = "kongdb"
-  instance_class       = var.db_instance_type[var.environment] #"db.t2.micro"
+  instance_class       = var.db_instance_type[var.environment]
   password             = var.db_password
   skip_final_snapshot  = true
   multi_az             = var.environment == "prod" ? true : false
   #storage_encrypted    = true
   username             = var.db_username
   depends_on            = [aws_db_subnet_group.kong_bd_subnet_group]
-  vpc_security_group_ids = [aws_security_group.sg_kong.id]
+  vpc_security_group_ids = [aws_security_group.sg_kong_bd.id]
 }
 
 #Leeme: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets
