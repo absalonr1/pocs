@@ -89,7 +89,7 @@ resource "aws_instance" "kong_vm_1" {
         db_pg_user=var.kong_db_username, db_pg_password=var.kong_db_password }
         ) 
 
- depends_on = [aws_db_instance.kong_bd]
+ depends_on = [aws_instance.kong_vm_2]
 
   tags = {
     Name = "kong_vm_1"
@@ -113,7 +113,7 @@ resource "aws_instance" "kong_vm_2" {
         db_pg_user=var.kong_db_username, db_pg_password=var.kong_db_password }
         ) 
 
- depends_on = [aws_db_instance.kong_bd]
+ depends_on = [aws_instance.kong_bastion]
 
   tags = {
     Name = "kong_vm_2"
